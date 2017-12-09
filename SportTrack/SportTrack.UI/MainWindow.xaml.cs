@@ -21,8 +21,6 @@ namespace SportTrack.UI
     /// </summary>
     public partial class MainWindow : Window
     {
-        SportsFeedApi sportsFeedApi = new SportsFeedApi();
-
         public MainWindow()
         {
             InitializeComponent();
