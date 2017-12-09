@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using SportTrack.Logic;
 
 namespace SportTrack.UI
 {
@@ -20,6 +21,8 @@ namespace SportTrack.UI
     /// </summary>
     public partial class MainWindow : Window
     {
+        SportsFeedApi sportsFeedApi = new SportsFeedApi();
+
         public MainWindow()
         {
             InitializeComponent();

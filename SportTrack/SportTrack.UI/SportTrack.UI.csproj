@@ -91,7 +91,15 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SportTrack.Logic\SportTrack.Logic.csproj">
+      <Project>{1562ace4-6987-4d3a-9147-7e9a0887201b}</Project>
+      <Name>SportTrack.Logic</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
