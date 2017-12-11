@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 namespace SportTrack.Logic
 {
     public class InvalidStructureException : Exception { }
-    public class InvalidDate : Exception { }
+    public class InvalidDateException : Exception { }
 
     public class SportsFeedApi
     {
@@ -36,7 +37,7 @@ namespace SportTrack.Logic
 
         private string FormatDate(DateTime date)
         {
-            if (date > DateTime.Now || date.Year < 2007) throw new InvalidDate(); // API doesn't have info about competitions before 2007
+            if (date > DateTime.Now || date.Year < 2007) throw new InvalidDateException(); // API doesn't have info about competitions before 2007
             string formatted = date.ToString("yyyyMMdd");
             return formatted;
 
@@ -76,7 +77,7 @@ namespace SportTrack.Logic
             {
                 // Here goes the processing of all optional parameters...
                 string structure = FormatStructure(seasonYear, leagueStructure);
-                string url = $"https://api.mysportsfeeds.com/v1.1/pull/{sport}/{structure}/team_gamelogs.json";
+                string url = $"https://api.mysportsfeeds.com/v1.1/pull/{sport}/{structure}/team_gamelogs.json?team=bos";
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Base64Encode("upnrunning" + ":" + "teamprojectsharp"));
                 string JsonEncodedResponse = await client.GetStringAsync(url);
                 return JsonEncodedResponse;
@@ -87,12 +88,13 @@ namespace SportTrack.Logic
         {
             using (var client = new HttpClient())
             {
-                // Here goes the processing of all optional parameters...
-                string structure = FormatStructure(seasonYear, leagueStructure);
-                string url = $"https://api.mysportsfeeds.com/v1.1/pull/{sport}/{structure}/full_game_schedule.json";
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Base64Encode("upnrunning" + ":" + "teamprojectsharp"));
-                string JsonEncodedResponse = await client.GetStringAsync(url);
-                return JsonEncodedResponse;
+                    // Here goes the processing of all optional parameters...
+                    string structure = FormatStructure(seasonYear, leagueStructure);
+                    string url = $"https://api.mysportsfeeds.com/v1.1/pull/{sport}/{structure}/full_game_schedule.json?force=false";
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Base64Encode("upnrunning" + ":" + "teamprojectsharp"));
+                    string JsonEncodedResponse = await client.GetStringAsync(url);
+                    return JsonEncodedResponse;
+                
             }
         }
 
