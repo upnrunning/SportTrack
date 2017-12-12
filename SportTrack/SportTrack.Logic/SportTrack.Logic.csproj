@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SportsFeedModel\Context.cs" />
     <Compile Include="SportsFeedModel\GameEntry.cs" />
     <Compile Include="SportsFeedModel\GameStats.cs" />
     <Compile Include="SportsFeedModel\ScoreBoard.cs" />

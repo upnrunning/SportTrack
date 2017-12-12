@@ -1,0 +1,28 @@
+﻿<Window x:Class="SportTrack.UI.SingIn"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SportTrack.UI"
+        mc:Ignorable="d"
+        Title="SingIn" Height="250" Width="360">
+    <Grid Background="Bisque">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+             
+
+        </Grid.ColumnDefinitions>
+        <Label Grid.Column="0" Content="Login" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
+        <Label Grid.Column="0" Grid.Row="1" Content="Password" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
+        <TextBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Margin="25,25,50,20"></TextBox>
+        <PasswordBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="25,25,50,20"></PasswordBox>
+        <Button Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2" Margin="20" Content="Create new account" Background="LightBlue"></Button>
+    </Grid>
+</Window>

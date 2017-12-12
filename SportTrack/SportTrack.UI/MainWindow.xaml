@@ -5,8 +5,36 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SportTrack.UI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
+        Title="MainWindow" Height="840" Width="1200">
+    <Grid ShowGridLines="True">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="12*"></RowDefinition>
+            <RowDefinition Height="8*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5*"></ColumnDefinition>
+            <ColumnDefinition Width="4*"></ColumnDefinition>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Menu Grid.Column="2">
+            <MenuItem   Header="Settings"  HorizontalAlignment="Right" VerticalAlignment="Bottom"     Background="Bisque" >
+                <MenuItem Header="Settings"></MenuItem>
+                <MenuItem Header="Exit"></MenuItem>
+            </MenuItem>
+            
+        </Menu>
         
+        <Button Background="Bisque" Name = "Goals" Grid.Column="0">Goals</Button>
+        <Button Background="Bisque" Name = "F_sport" Grid.Column="1">Favourite sport</Button>
+        <Grid Grid.Column="0" Grid.Row="1">
+            
+        </Grid>
+        
+
+
+
     </Grid>
 </Window>
