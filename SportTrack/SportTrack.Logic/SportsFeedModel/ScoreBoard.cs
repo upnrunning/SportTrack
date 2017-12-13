@@ -20,18 +20,18 @@ namespace SportTrack.Logic.SportsFeedModel
         [JsonProperty("periodSummary")]
         public PeriodSummary PeriodSummary { get; set; }
         [JsonProperty("quarterSummary")]
-        public PeriodSummary QuarterSummary{ get { return PeriodSummary; } set {PeriodSummary = value; } } // Wrapper
+        private PeriodSummary QuarterSummary{ set {PeriodSummary = value; } } // Wrapper for JSON
     }
-    [NotMapped]
+
     public class PeriodSummary
     {
         [JsonProperty("period")]
         public Period[] Periods { get; set; }
 
         [JsonProperty("quarter")]
-        public Period[] Quarters { get { return Periods;} set { Periods = value; }  }
+        private Period[] Quarters { set { Periods = value; }  }
     }
-    [NotMapped]
+
     public class Period
     {
         [JsonProperty("@number")]
