@@ -27,7 +27,7 @@
             
         </Menu>
         
-        <Button Background="Bisque" Name = "Goals" Grid.Column="0">Goals</Button>
+        <Button Background="Bisque" Name = "Goals" Grid.Column="0" Click="Goals_Click">Goals</Button>
         <Button Background="Bisque" Name = "F_sport" Grid.Column="1">Favourite sport</Button>
         <Grid Grid.Column="0" Grid.Row="1">
             

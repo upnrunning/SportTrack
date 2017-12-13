@@ -27,5 +27,12 @@ namespace SportTrack.UI
             InitializeComponent();
                 sp.GetDataAsync("nba", 2017, "playoff", new DateTime(2017, 04, 22), null);
         }
+
+        private void Goals_Click(object sender, RoutedEventArgs e)
+        {
+            CreateNewTask a = new CreateNewTask();
+            a.Show();
+           
+        }
     }
 }

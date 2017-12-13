@@ -22,6 +22,34 @@ namespace SportTrack.UI
         public CreateNewTask()
         {
             InitializeComponent();
+            DateTime a = new DateTime(1, 1, 1);
+            CalendarDateRange u = new CalendarDateRange(a, Convert.ToDateTime(DateTime.Today.AddDays(-1))); //блакаут для первого календаря 
+            AAAAA.BlackoutDates.Clear();
+            AAAAA.BlackoutDates.Add(u);
+            basd.BlackoutDates.Clear();
+            basd.BlackoutDates.Add(u);
+        }
+        public IEnumerable<DateTime> EachDay(DateTime from, DateTime thru)
+        {
+            for (var day = from.Date; day.Date <= thru.Date; day = day.AddDays(1))
+                yield return day;
+        }
+
+
+        private void AAAAA_SelectedDateChanged(object sender, SelectionChangedEventArgs e) //блэкаут для второго календаря
+        {
+            DateTime a = new DateTime(1, 1, 1);
+            DateTime? b = AAAAA.SelectedDate;
+            if (AAAAA.SelectedDate != null)
+            {
+                b = AAAAA.SelectedDate;
+            }
+
+
+            CalendarDateRange r = new CalendarDateRange(a, Convert.ToDateTime(b));
+            basd.BlackoutDates.Clear();
+            basd.BlackoutDates.Add(r);
+
         }
     }
-}
+ }

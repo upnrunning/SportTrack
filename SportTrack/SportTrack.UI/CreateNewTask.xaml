@@ -1,61 +1,63 @@
-﻿<Window x:Class="SportTrack.UI.CreateNewTask"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:SportTrack.UI"
-        mc:Ignorable="d"
-        Title="CreateNewTask" Height="531" Width="548">
-    <Grid Background="AntiqueWhite">
-
+﻿<Window x:Class="SportTrack.UI.CreateNewTask" 
+xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+xmlns:local="clr-namespace:SportTrack.UI" 
+mc:Ignorable="d"
+Title="CreateNewTask" Height="531" Width="360" ResizeMode="NoResize">
+    <Grid Background="BlanchedAlmond">
         <Grid.RowDefinitions>
-
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="3*"></ColumnDefinition>
 
         </Grid.ColumnDefinitions>
-        <Grid Grid.Column="0">
+        <Grid Grid.Column="1" Grid.Row="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="2*"></ColumnDefinition>
 
-            </Grid.ColumnDefinitions>
-            <Label Grid.Column="0" Grid.Row="0" Content="Name" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
-            <Label Grid.Column="0" Grid.Row="1" Content="First Day" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
-            <Label Grid.Column="0" Grid.Row="2" Content="Last Day" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
-            <TextBox Grid.Column="1" Margin="10,10,10,10"></TextBox>
-            <Calendar Grid.Column="1" Grid.Row="1"></Calendar>
-            <Calendar Grid.Column="1" Grid.Row="2"></Calendar>
+            </Grid.RowDefinitions>
+            <DatePicker Name="AAAAA" SelectedDateChanged="AAAAA_SelectedDateChanged" Grid.Row="0" ></DatePicker>
+            <DatePicker Name="basd" Grid.Row="2" ></DatePicker>
         </Grid>
-        <Grid Grid.Column="1"  >
+
+        <Button Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="4" Margin="10,20" Background="RoyalBlue" FontSize="44">CLICK ME</Button>
+        <TextBox Grid.Column="1" Margin="10,10" Background="LightSteelBlue"></TextBox>
+        <ComboBox Background="Black" Grid.Row="3" Grid.Column="1" Margin="0,40" >
+            <TextBlock HorizontalAlignment="Stretch" >Day</TextBlock>
+            <TextBlock>Week</TextBlock>
+            <TextBlock>Month</TextBlock>
+        </ComboBox>
+        <Label VerticalAlignment="Center" HorizontalAlignment="Center" Content="Name"></Label>
+        <Label VerticalAlignment="Center" HorizontalAlignment="Center" Content="тип цели" Grid.Row="1"></Label>
+        <Label VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="2">
+            <Label.Content>
+                <TextBlock TextWrapping="Wrap">тут дата</TextBlock>
+            </Label.Content>
+        </Label>
+        <Label VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="3">
+            <Label.Content>
+                <TextBlock TextWrapping="Wrap">частота</TextBlock>
+            </Label.Content>
+        </Label>
+        <Grid Grid.Column="1" Grid.Row="1" Background="BlanchedAlmond">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="2*"></ColumnDefinition>
-
-            </Grid.ColumnDefinitions>
-            <Label Content="Description" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
-            <Label Content="Slogan))" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
-            <Button BorderThickness="0" Grid.Column="1" Grid.Row="2" Margin="20,40,20,40" Background="LightSkyBlue" >
-                <TextBox BorderThickness="0" Background="LightSkyBlue" Text="Save changes or change, my english is very bad"
-                       TextWrapping="Wrap"
-                       TextAlignment="Center"/>
-            </Button>
-            <TextBox Grid.Column="1" Margin="10" BorderThickness="1" ></TextBox>
-            <TextBox Grid.Column="1" Grid.Row="1" BorderThickness="1" Margin="10,40,10,40" Foreground="Black" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-            </TextBox>
+            <RadioButton x:Name="f1" VerticalAlignment="Center"></RadioButton>
+            <RadioButton x:Name="f2" VerticalAlignment="Center" Grid.Row="1"></RadioButton>
+            <TextBlock Margin="20,10" FontSize="21">Качественная</TextBlock>
+            <TextBlock Margin="20,10" Grid.Row="1" FontSize="21">Количественная</TextBlock>
         </Grid>
     </Grid>
 </Window>
