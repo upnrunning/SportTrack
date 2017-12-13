@@ -17,16 +17,16 @@ namespace SportTrack.Logic
         private string _gameStatsJson;
         private string _overallSchedJson;
 
-        //public List<ScoreBoard> ScoreBoardList { get; set; }
-        //public List<GameStats> GameStatsList { get; set; }
+        public List<ScoreBoard> ScoreBoardList { get; set; }
+        public List<GameLog> GameLogsList { get; set; }
         public List<GameEntry> ScheduleList { get; set;}
 
         public SportsFeedRepository()
         {
             requestDates = new Dictionary<string, DateTime>();   // Dictionary with dates of requests to the server. 
                                                                  // Used to avoid downloading data too often.
-            //ScoreBoardList = new List<ScoreBoard>();
-            //GameStatsList = new List<GameStats>();
+            ScoreBoardList = new List<ScoreBoard>();
+            GameLogsList = new List<GameLog>();
             ScheduleList = new List<GameEntry>();
         }
 
@@ -54,7 +54,22 @@ namespace SportTrack.Logic
                 GameEntry gameentry = item.ToObject<GameEntry>();
                 ScheduleList.Add(gameentry);
             }
-            
+
+            JObject scoreBoards = JObject.Parse(scoreboardJSON);
+            IList<JToken> scores = scoreBoards["scoreboard"]["gameScore"].Children().ToList();
+            foreach(var item in scores)
+            {
+                ScoreBoard scoreboard = item.ToObject<ScoreBoard>();
+                ScoreBoardList.Add(scoreboard);
+            }
+
+            JObject statistic = JObject.Parse(gamestatsJSON);
+            IList<JToken> stats = statistic["teamgamelogs"]["gamelogs"].Children().ToList();
+            foreach (var item in stats)
+            {
+                GameLog gamelog = item.ToObject<GameLog>();
+                GameLogsList.Add(gamelog);
+            }
 
         }
     }

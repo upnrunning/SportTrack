@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -8,30 +9,24 @@ using System.Threading.Tasks;
 namespace SportTrack.Logic.SportsFeedModel
 {
     [NotMapped]
-    public class GameStats
+    public class GameLog
     {
+        [JsonProperty("game")]
         public GameEntry GameEntry { get; set; }
         public Team Team { get; set; }
+        [JsonProperty("stats")]
+        Dictionary<string, StatType> Statistics { get; set; }
     }
 
-    public class GameStatsBasket : GameStats // starting from here - specific stats for each sport
+    [NotMapped]
+    public class StatType
     {
-
-    }
-
-    public class GameStatsHockey : GameStats
-    {
-
-    }
-
-    public class GameStatsFootball : GameStats
-    {
-
-    }
-
-    public class GameStatsBaseball : GameStats
-    {
-
+        [JsonProperty("@category")]
+        public string Category { get; set; }
+        [JsonProperty("@abbreviation")]
+        public string Abbreviation { get; set; }
+        [JsonProperty("#text")]
+        public double Value { get; set; }
     }
 
 }

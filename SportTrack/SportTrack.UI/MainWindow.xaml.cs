@@ -23,9 +23,9 @@ namespace SportTrack.UI
     {
         public MainWindow()
         {
-            //SportsFeedRepository sp = new SportsFeedRepository();
+            SportsFeedRepository sp = new SportsFeedRepository();
             InitializeComponent();
-            //sp.GetDataAsync("nba", 2016, "regular", new DateTime(2016, 10, 26), null);
+                sp.GetDataAsync("nba", 2017, "playoff", new DateTime(2017, 04, 22), null);
         }
     }
 }

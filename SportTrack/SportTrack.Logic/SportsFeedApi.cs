@@ -90,7 +90,7 @@ namespace SportTrack.Logic
             {
                     // Here goes the processing of all optional parameters...
                     string structure = FormatStructure(seasonYear, leagueStructure);
-                    string url = $"https://api.mysportsfeeds.com/v1.1/pull/{sport}/{structure}/full_game_schedule.json?force=false";
+                    string url = $"https://api.mysportsfeeds.com/v1.1/pull/{sport}/{structure}/full_game_schedule.json";
                     client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Base64Encode("upnrunning" + ":" + "teamprojectsharp"));
                     string JsonEncodedResponse = await client.GetStringAsync(url);
                     return JsonEncodedResponse;
