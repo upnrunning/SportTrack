@@ -54,9 +54,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Brouser.xaml.cs">
+      <DependentUpon>Brouser.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SingIn.xaml.cs">
       <DependentUpon>SingIn.xaml</DependentUpon>
     </Compile>
+    <Page Include="Brouser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CreateNewTask.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
