@@ -54,13 +54,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Brouser.xaml.cs">
-      <DependentUpon>Brouser.xaml</DependentUpon>
+    <Compile Include="Browser.xaml.cs">
+      <DependentUpon>Browser.xaml</DependentUpon>
     </Compile>
     <Compile Include="SingIn.xaml.cs">
       <DependentUpon>SingIn.xaml</DependentUpon>
     </Compile>
-    <Page Include="Brouser.xaml">
+    <Page Include="Browser.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -7,6 +7,6 @@
         mc:Ignorable="d"
         Title="Brouser" Height="300" Width="300">
     <Grid>
-        
+        <WebBrowser Source="http://vk.com"></WebBrowser>
     </Grid>
 </Window>
