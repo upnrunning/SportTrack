@@ -23,9 +23,11 @@ namespace SportTrack.UI
     {
         public MainWindow()
         {
-            SportsFeedRepository sp = new SportsFeedRepository();
+            //SportsFeedRepository sp = new SportsFeedRepository();
+            //BingRepository b = new BingRepository();
             InitializeComponent();
-                sp.GetDataAsync("nba", 2017, "playoff", new DateTime(2017, 04, 22), null);
+            //sp.GetDataAsync("nba", 2017, "playoff", new DateTime(2017, 04, 22), null);
+            //b.GetBingDataAsync("nba news");
         }
 
         private void Goals_Click(object sender, RoutedEventArgs e)

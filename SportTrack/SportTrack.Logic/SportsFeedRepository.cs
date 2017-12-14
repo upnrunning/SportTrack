@@ -30,7 +30,7 @@ namespace SportTrack.Logic
             ScheduleList = new List<GameEntry>();
         }
 
-        public async void GetDataAsync(string sport, int SeasonYear, string LeagueStructure, DateTime date, List<string> additionalParams)
+        public async void SportsFeedGetDataAsync(string sport, int SeasonYear, string LeagueStructure, DateTime date, List<string> additionalParams)
 
         {
             if (!requestDates.ContainsKey(sport) || requestDates[sport] < DateTime.Now.AddHours(-6))

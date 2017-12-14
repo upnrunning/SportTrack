@@ -98,6 +98,18 @@ namespace SportTrack.Logic
             }
         }
 
-       
+        public async Task<string> RequestStandings(string sport, int seasonYear, string leagueStructure, List<string> additionalParams)
+        {
+            using (var client = new HttpClient())
+            {
+                // Here goes the processing of all optional parameters...
+                string structure = FormatStructure(seasonYear, leagueStructure);
+                string url = $"https://api.mysportsfeeds.com/v1.1/pull/{sport}/{structure}/daily_game_schedule.json";
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Base64Encode("upnrunning" + ":" + "teamprojectsharp"));
+                string JsonEncodedResponse = await client.GetStringAsync(url);
+                return JsonEncodedResponse;
+            }
+        }
+
     }
 }
