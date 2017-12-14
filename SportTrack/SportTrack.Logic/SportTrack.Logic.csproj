@@ -58,6 +58,7 @@
     <Compile Include="BingRepository.cs" />
     <Compile Include="Model\Objective.cs" />
     <Compile Include="Model\User.cs" />
+    <Compile Include="Repository.cs" />
     <Compile Include="SportsFeedModel\GameEntry.cs" />
     <Compile Include="SportsFeedModel\GameStats.cs" />
     <Compile Include="SportsFeedModel\ScoreBoard.cs" />

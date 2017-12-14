@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using SportTrack.Logic.BingModel;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System;
 
 namespace SportTrack.Logic
 {
@@ -16,24 +13,24 @@ namespace SportTrack.Logic
         
         private string _newsJSON;
 
-        public List<BingResult> SearchResults { get; set; }
-
-        public BingRepository()
-        {
-            SearchResults = new List<BingResult>();
-        }
-
         public async void GetBingDataAsync(string query)
         {
-            BingApi bing = new BingApi();
-            _newsJSON = await bing.BingRequestNews(query);
-            JObject results = JObject.Parse(_newsJSON);
-            IList<JToken> bingResults = results["value"].Children().ToList();
-            foreach (var item in bingResults)
+            if (!Repository.RequestDates.ContainsKey(query) || Repository.RequestDates[query] < DateTime.Now.AddHours(-6))
             {
-                BingResult res = item.ToObject<BingResult>();
-                SearchResults.Add(res);
+                Repository.RequestDates[query] = DateTime.Now;
+                BingApi bing = new BingApi();
+                _newsJSON = await bing.BingRequestNews(query);
+                JObject results = JObject.Parse(_newsJSON);
+                IList<JToken> bingResults = results["value"].Children().ToList();
+                Repository.SearchResults.Clear();
+                foreach (var item in bingResults)
+                {
+                    BingResult res = item.ToObject<BingResult>();
+                    Repository.SearchResults.Add(res);
+                }
             }
+
+            else { } // ?????
         }
 
     } 

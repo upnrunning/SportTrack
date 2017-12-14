@@ -15,7 +15,7 @@ namespace SportTrack.Logic
         public async Task<string> BingRequestNews(string query)
         {
             using (var client = new HttpClient())
-            {
+            { 
                 client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", accessKey);
                 var queryString = HttpUtility.ParseQueryString(string.Empty);
                 queryString["q"] = query; 

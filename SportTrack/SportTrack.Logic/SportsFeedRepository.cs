@@ -12,30 +12,19 @@ namespace SportTrack.Logic
 {
     public class SportsFeedRepository
     {
-        private Dictionary<string, DateTime> requestDates;
+        
         private string _scoreBoardJson;
         private string _gameStatsJson;
         private string _overallSchedJson;
 
-        public List<ScoreBoard> ScoreBoardList { get; set; }
-        public List<GameLog> GameLogsList { get; set; }
-        public List<GameEntry> ScheduleList { get; set;}
-
-        public SportsFeedRepository()
-        {
-            requestDates = new Dictionary<string, DateTime>();   // Dictionary with dates of requests to the server. 
-                                                                 // Used to avoid downloading data too often.
-            ScoreBoardList = new List<ScoreBoard>();
-            GameLogsList = new List<GameLog>();
-            ScheduleList = new List<GameEntry>();
-        }
+       
 
         public async void SportsFeedGetDataAsync(string sport, int SeasonYear, string LeagueStructure, DateTime date, List<string> additionalParams)
 
         {
-            if (!requestDates.ContainsKey(sport) || requestDates[sport] < DateTime.Now.AddHours(-6))
+            if (!Repository.RequestDates.ContainsKey(sport) || Repository.RequestDates[sport] < DateTime.Now.AddHours(-6))
             {
-                requestDates[sport] = DateTime.Now;
+                Repository.RequestDates[sport] = DateTime.Now;
                 SportsFeedApi sportsFeedApi = new SportsFeedApi();
                 _scoreBoardJson = await sportsFeedApi.RequestScoreBoard(sport, SeasonYear, LeagueStructure, date, additionalParams);
                 _gameStatsJson = await sportsFeedApi.RequestGameStats(sport, SeasonYear, LeagueStructure, additionalParams);
@@ -47,12 +36,16 @@ namespace SportTrack.Logic
 
         private void DeserializeJson(string scoreboardJSON, string gamestatsJSON, string overallJSON, string sport)
         {
+            Repository.ScoreBoardList.Clear();
+            Repository.GameLogsList.Clear();
+            Repository.ScheduleList.Clear();
+
             JObject sportsFeedSchedule = JObject.Parse(overallJSON); // if == null catch exception? (No games were found for this date)
             IList<JToken> games = sportsFeedSchedule["fullgameschedule"]["gameentry"].Children().ToList();
             foreach (var item in games)
             {
                 GameEntry gameentry = item.ToObject<GameEntry>();
-                ScheduleList.Add(gameentry);
+                Repository.ScheduleList.Add(gameentry);
             }
 
             JObject scoreBoards = JObject.Parse(scoreboardJSON);
@@ -60,7 +53,7 @@ namespace SportTrack.Logic
             foreach(var item in scores)
             {
                 ScoreBoard scoreboard = item.ToObject<ScoreBoard>();
-                ScoreBoardList.Add(scoreboard);
+                Repository.ScoreBoardList.Add(scoreboard);
             }
 
             JObject statistic = JObject.Parse(gamestatsJSON);
@@ -68,7 +61,7 @@ namespace SportTrack.Logic
             foreach (var item in stats)
             {
                 GameLog gamelog = item.ToObject<GameLog>();
-                GameLogsList.Add(gamelog);
+                Repository.GameLogsList.Add(gamelog);
             }
 
         }
