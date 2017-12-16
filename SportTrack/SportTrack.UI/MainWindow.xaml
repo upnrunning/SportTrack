@@ -92,6 +92,8 @@
             <Image Margin="10"  Grid.Row="2" x:Name="Sponsor2"></Image>
         </Grid>
         <Grid x:Name="News" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2">
+            <MediaElement Grid.RowSpan="2" x:Name="LoadingGif" MediaEnded="LoadingGif_MediaEnded" UnloadedBehavior="Manual" LoadedBehavior="Play" Stretch="None"></MediaElement>
+            <TextBlock x:Name="loadingTextBlock" FontSize="44" Grid.ColumnSpan="3" Grid.Column="2" Margin="26.6,121,168.8,32.8" Grid.RowSpan="2">Data loading</TextBlock>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>

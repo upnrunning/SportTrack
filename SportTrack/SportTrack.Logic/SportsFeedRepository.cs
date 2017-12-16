@@ -14,7 +14,7 @@ namespace SportTrack.Logic
     {
         
         private string _scoreBoardJson;
-        private string _gameStatsJson;
+        //private string _gameStatsJson;
         private string _overallSchedJson;
         private string _overallStandings;
         private string _divisionStandings;
