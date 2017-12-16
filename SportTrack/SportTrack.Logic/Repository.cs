@@ -15,6 +15,10 @@ namespace SportTrack.Logic
         public static List<GameLog> GameLogsList { get; set; }
         public static List<GameEntry> ScheduleList { get; set; }
         public static List<BingResult> SearchResults { get; set; }
+        public static List<TeamEntry> OverallStandings { get; set; }
+        public static List<Structure> DivisionStandings { get; set; }
+        public static List<Structure> ConferenceStandings { get; set; }
+        public static List<Structure> PlayOffStandings { get; set; }
 
         public Repository()
         {
@@ -24,6 +28,10 @@ namespace SportTrack.Logic
             GameLogsList = new List<GameLog>();
             ScheduleList = new List<GameEntry>();
             SearchResults = new List<BingResult>();
+            OverallStandings = new List<TeamEntry>();
+            DivisionStandings = new List<Structure>();
+            ConferenceStandings = new List<Structure>();
+            PlayOffStandings = new List<Structure>();
         }
     }
 }

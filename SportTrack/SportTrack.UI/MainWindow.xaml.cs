@@ -28,12 +28,12 @@ namespace SportTrack.UI
         {
 
 
-            //SportsFeedRepository sp = new SportsFeedRepository();
+            SportsFeedRepository sp = new SportsFeedRepository();
             //BingRepository b = new BingRepository();
             InitializeComponent();
             Repository r = new Repository();
             b.GetBingDataAsync("NBA news");
-            //sp.GetDataAsync("nba", 2017, "playoff", new DateTime(2017, 04, 22), null);
+            sp.SportsFeedGetDataAsync("nba", 2017, "playoff", new DateTime(2017, 04, 22), null);
             //b.GetBingDataAsync("nba news");string c = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
             string c = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
             Sponsor.Source = new BitmapImage(new Uri(c + @"\..\3NWzq6NI58Y.jpg"));

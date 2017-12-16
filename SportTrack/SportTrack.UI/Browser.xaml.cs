@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -28,7 +29,12 @@ namespace SportTrack.UI
         public Browser(Uri uri)
         {
             InitializeComponent();
-          
+            WebBrowser.Navigate(uri);
+            dynamic activeX = WebBrowser.GetType().InvokeMember("ActiveXInstance",
+                     BindingFlags.GetProperty | BindingFlags.Instance | BindingFlags.NonPublic,
+                     null, WebBrowser, new object[] { }); 
+
+            activeX.Silent = true; // silent the script error message
         }
     }
 }

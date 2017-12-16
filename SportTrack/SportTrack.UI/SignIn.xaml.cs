@@ -17,9 +17,9 @@ namespace SportTrack.UI
     /// <summary>
     /// Логика взаимодействия для SingIn.xaml
     /// </summary>
-    public partial class SingIn : Window
+    public partial class SignIn : Window
     {
-        public SingIn()
+        public SignIn()
         {
             InitializeComponent();
         }

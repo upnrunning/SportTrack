@@ -19,7 +19,7 @@ namespace SportTrack.Logic
             {
                 Repository.RequestDates[query] = DateTime.Now;
                 BingApi bing = new BingApi();
-                _newsJSON = await bing.BingRequestNews(query);
+                _newsJSON = bing.BingRequestNews(query).Result;
                 JObject results = JObject.Parse(_newsJSON);
                 IList<JToken> bingResults = results["value"].Children().ToList();
                 Repository.SearchResults.Clear();

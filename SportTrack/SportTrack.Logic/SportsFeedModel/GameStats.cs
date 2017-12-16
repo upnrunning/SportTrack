@@ -21,8 +21,6 @@ namespace SportTrack.Logic.SportsFeedModel
     [NotMapped]
     public class StatType
     {
-        [JsonProperty("@category")]
-        public string Category { get; set; }
         [JsonProperty("@abbreviation")]
         public string Abbreviation { get; set; }
         [JsonProperty("#text")]

@@ -7,6 +7,6 @@
         mc:Ignorable="d"
         Title="Brouser" Height="300" Width="300">
     <Grid>
-        <WebBrowser Name="Browser"></WebBrowser>
+        <WebBrowser Name="WebBrowser"></WebBrowser>
     </Grid>
 </Window>

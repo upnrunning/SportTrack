@@ -8,10 +8,30 @@ using System.Threading.Tasks;
 
 namespace SportTrack.Logic.SportsFeedModel
 {
-    [NotMapped]
-    public class Standings
-    {
+    //[NotMapped]
+    //public class StandingsDivConf
+    //{
+    //    [JsonProperty("division")]
+    //    public Structure Structure { get; set; }
 
+    //    [JsonProperty("conference")]
+    //    private Structure Structure2 { set { Structure = value; } }
+    //}
+
+    //[NotMapped]
+    //public class Structure
+    //{
+    //    public TeamEntry[] Standings { get; set; }
+    //}
+
+
+        [NotMapped]
+    public class Structure
+    {
+        [JsonProperty("@name")]
+        public string Name { get; set; }
+        [JsonProperty("teamentry")]
+        public TeamEntry[] Standings { get; set; }
     }
 
     [NotMapped]
@@ -20,14 +40,14 @@ namespace SportTrack.Logic.SportsFeedModel
         public Team Team { get; set; }
         public int Rank { get; set; }
         [JsonProperty("stats")]
-        public Info Info;
-    }
-
-    [NotMapped]
-    public class Info
-    {
-        public KeyValuePair<string,StatType> GamesPlayed { get; set; }
-        [JsonProperty("stats")]
         Dictionary<string, StatType> StatTypes { get; set; }
     }
+
+    //[NotMapped]
+    //public class Info
+    //{
+    //    public KeyValuePair<string,StatType> GamesPlayed { get; set; }
+    //    [JsonProperty("stats")]
+        
+    //}
 }

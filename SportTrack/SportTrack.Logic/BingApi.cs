@@ -22,7 +22,7 @@ namespace SportTrack.Logic
                 queryString["mkt"] = "en-US";
                 queryString["count"] = Convert.ToString(_responseCount);
                 string url = uriBase + queryString;
-                _responseJSON = await client.GetStringAsync(url);
+                _responseJSON = client.GetStringAsync(url).Result;
                 return _responseJSON;
             }
         }
