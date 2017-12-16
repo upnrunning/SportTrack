@@ -17,11 +17,18 @@ namespace SportTrack.UI
     /// <summary>
     /// Логика взаимодействия для Brouser.xaml
     /// </summary>
-    public partial class Brouser : Window
+    public partial class Browser : Window
     {
-        public Brouser()
+     
+        public Browser()
         {
             InitializeComponent();
+        }
+
+        public Browser(Uri uri)
+        {
+            InitializeComponent();
+          
         }
     }
 }

@@ -28,7 +28,7 @@
 
         </Menu>
 
-        <Button Background="Bisque" Name = "Goals" Grid.Column="0" Click="Goals_Click">Goals</Button>
+        <Button Background="Bisque" Name = "Goals" Grid.Column="0">Goals</Button>
         <Button Background="Bisque" Name = "F_sport" Grid.Column="1">Favourite sport</Button>
         <Grid Grid.Column="0" Grid.Row="1">
 
@@ -82,10 +82,10 @@
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <RadioButton VerticalAlignment="Center"  HorizontalAlignment="Center" IsChecked="True" FlowDirection="RightToLeft" >NHL</RadioButton>
-                <RadioButton VerticalAlignment="Bottom" Margin="0,0,-3,0" HorizontalContentAlignment="Left" HorizontalAlignment="Center" FlowDirection="RightToLeft">NFL</RadioButton>
-                <RadioButton VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1">MLB</RadioButton>
-                <RadioButton VerticalAlignment="Bottom" HorizontalAlignment="Center" Grid.Column="1">NBA</RadioButton>
+                <RadioButton IsMouseDirectlyOverChanged="RadioButton_SportChanged" VerticalAlignment="Center"  HorizontalAlignment="Center" IsChecked="True" FlowDirection="RightToLeft" >NHL</RadioButton>
+                <RadioButton IsMouseDirectlyOverChanged="RadioButton_SportChanged" VerticalAlignment="Bottom" Margin="0,0,-3,0" HorizontalContentAlignment="Left" HorizontalAlignment="Center" FlowDirection="RightToLeft">NFL</RadioButton>
+                <RadioButton IsMouseDirectlyOverChanged="RadioButton_SportChanged" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1">MLB</RadioButton>
+                <RadioButton IsMouseDirectlyOverChanged="RadioButton_SportChanged" VerticalAlignment="Bottom" HorizontalAlignment="Center" Grid.Column="1">NBA</RadioButton>
                 <Label Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalContentAlignment="Center">CHOOOSE YOUR SPORT BEATCH</Label>
             </Grid>
             <Image Margin="10"  Grid.Row="1" x:Name="Sponsor"></Image>

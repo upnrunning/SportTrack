@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using SportTrack.Logic;
 using System.IO;
+using System.Threading;
 
 namespace SportTrack.UI
 {
@@ -22,60 +23,63 @@ namespace SportTrack.UI
     /// </summary>
     public partial class MainWindow : Window
     {
+        BingRepository b = new BingRepository();
         public MainWindow()
         {
+
+
             //SportsFeedRepository sp = new SportsFeedRepository();
             //BingRepository b = new BingRepository();
             InitializeComponent();
+            Repository r = new Repository();
+            b.GetBingDataAsync("NBA news");
             //sp.GetDataAsync("nba", 2017, "playoff", new DateTime(2017, 04, 22), null);
             //b.GetBingDataAsync("nba news");string c = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
             string c = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
             Sponsor.Source = new BitmapImage(new Uri(c + @"\..\3NWzq6NI58Y.jpg"));
             Sponsor2.Source = new BitmapImage(new Uri(c + @"\..\qFGrsz8RhOQ.jpg"));
-            for (int i = 0; i < 10; i++)
-            {
-                Hyperlink a = new Hyperlink();
-                a.NavigateUri = new Uri("https://vk.com");
-                Image image = new Image();
-                image.Source = new BitmapImage(new Uri(c + @"\..\3NWzq6NI58Y.jpg"));
-                image.Height = 48;
-                image.Width = 48;
-                image.VerticalAlignment = VerticalAlignment.Top;
-                image.HorizontalAlignment = HorizontalAlignment.Left;
-                image.Margin = new Thickness(5);
-                TextBlock btn = new TextBlock();
-                btn.VerticalAlignment = VerticalAlignment.Top;
-                btn.Width = 120;
-                btn.Height = 38;
-                btn.Margin = new Thickness(55, 5, 5, 5);
-                a.Inlines.Add("https://vk.com");
-                btn.Inlines.Add(a);
-                btn.PreviewMouseDown += (s, e) => { Brouser aa = new Brouser(); aa.Show(); };
-                TextBlock tb = new TextBlock();
-                tb.VerticalAlignment = VerticalAlignment.Center;
-                tb.Height = 100;
-                tb.Margin = new Thickness(5, 30, 5, 0);
-                tb.Text = i.ToString();
-                News.Children.Add(tb);
-                Grid.SetRow(tb, i / 5);
-                Grid.SetColumn(tb, i % 5);
-                News.Children.Add(btn);
-                Grid.SetColumn(btn, i % 5);
-                Grid.SetRow(btn, i / 5);
-                News.Children.Add(image);
-                Grid.SetRow(image, i / 5);
-                Grid.SetColumn(image, i % 5);
+            
+                for (int i = 0; i < Repository.SearchResults.Count; i++)
+                {
+                    A.ShowGridLines = false;
+                    Hyperlink a = new Hyperlink();
+                    a.NavigateUri = new Uri(Repository.SearchResults[i].Url);
+                    Image image = new Image();
+                    image.Source = new BitmapImage(new Uri(c + @"\..\3NWzq6NI58Y.jpg"));
+                    image.Height = 48;
+                    image.Width = 48;
+                    image.VerticalAlignment = VerticalAlignment.Top;
+                    image.HorizontalAlignment = HorizontalAlignment.Left;
+                    image.Margin = new Thickness(5);
+                    TextBlock btn = new TextBlock();
+                    btn.VerticalAlignment = VerticalAlignment.Top;
+                    btn.Width = 120;
+                    btn.Height = 38;
+                    btn.Margin = new Thickness(55, 5, 5, 5);
+                    a.Inlines.Add(Repository.SearchResults[i].Url);
+                    btn.Inlines.Add(a);
+                    btn.MaxWidth = 120;
+                    btn.PreviewMouseDown += (s, e) => { TextBlock but = s as TextBlock; Hyperlink link = but.Inlines.FirstInline as Hyperlink; Browser aa = new Browser(link.NavigateUri); aa.Show(); };
+                    TextBlock tb = new TextBlock();
+                    tb.Name = "tb" + i.ToString();
+                    tb.Text = Repository.SearchResults[i].Description;
+                    tb.VerticalAlignment = VerticalAlignment.Center;
+                    tb.Height = 100;
+                    tb.TextWrapping = TextWrapping.Wrap;
+                    tb.Margin = new Thickness(5, 30, 5, 0);
+                    News.Children.Add(tb);
+                    Grid.SetRow(tb, i / 5);
+                    Grid.SetColumn(tb, i % 5);
+                    News.Children.Add(btn);
+                    Grid.SetColumn(btn, i % 5);
+                    Grid.SetRow(btn, i / 5);
+                    News.Children.Add(image);
+                    Grid.SetRow(image, i / 5);
+                    Grid.SetColumn(image, i % 5);
 
+                }
             }
-        }
-
-
-
-        private void Goals_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
+        
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Random rnd = new Random();
@@ -200,6 +204,12 @@ namespace SportTrack.UI
 
         }
 
-
-    }
+        private void RadioButton_SportChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            RadioButton ikikkk = sender as RadioButton;
+            string sport = ikikkk.Content.ToString();
+            
+            
+        }
+    } 
 }

@@ -8,7 +8,7 @@ namespace SportTrack.Logic
     public class BingApi
     {
         private string _responseJSON;
-        private int _responseCount = 30;
+        private int _responseCount = 10;
         const string accessKey = "2226d21693004636a67f2d4561752367";
         const string uriBase = "https://api.cognitive.microsoft.com/bing/v7.0/news/search?";
 

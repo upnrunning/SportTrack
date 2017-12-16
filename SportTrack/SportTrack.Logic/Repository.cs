@@ -23,6 +23,7 @@ namespace SportTrack.Logic
             ScoreBoardList = new List<ScoreBoard>();
             GameLogsList = new List<GameLog>();
             ScheduleList = new List<GameEntry>();
+            SearchResults = new List<BingResult>();
         }
     }
 }
