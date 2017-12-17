@@ -27,26 +27,27 @@ namespace SportTrack.UI
         BingRepository b = new BingRepository();
         public MainWindow()
         {
+            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             c = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
 
             SportsFeedRepository sp = new SportsFeedRepository();
-            //BingRepository b = new BingRepository();
             InitializeComponent();
             Repository r = new Repository();
             //sp.SportsFeedGetDataAsync("nba", 2017, "playoff", new DateTime(2017, 04, 22), null);
-            //b.GetBingDataAsync("nba news");string c = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
             LoadingGif.Source = new Uri(c + @"\..\loading.gif");
             Sponsor.Source = new BitmapImage(new Uri(c + @"\..\3NWzq6NI58Y.jpg"));
             Sponsor2.Source = new BitmapImage(new Uri(c + @"\..\qFGrsz8RhOQ.jpg"));
-            LoadNews();
+            LoadNews("nhl news");
             }
 
-        public async void LoadNews()
+        public async void LoadNews(string sport)
         {
-            await b.GetBingDataAsync("NBA news");
+           
+            await b.GetBingDataAsync(sport + " news");
             LoadingGif.Stop();
             LoadingGif.Visibility = Visibility.Collapsed;
             loadingTextBlock.Visibility = Visibility.Collapsed;
+            News.Children.Clear();
             for (int i = 0; i < Repository.SearchResults.Count; i++)
             {
                 A.ShowGridLines = false;
@@ -218,7 +219,10 @@ namespace SportTrack.UI
             RadioButton ikikkk = sender as RadioButton;
             string sport = ikikkk.Content.ToString();
             
-            
+            LoadingGif.Visibility = Visibility.Visible;
+            LoadingGif.Play();
+            loadingTextBlock.Visibility = Visibility.Visible;
+            LoadNews(sport);
         }
 
         private void LoadingGif_MediaEnded(object sender, RoutedEventArgs e)
