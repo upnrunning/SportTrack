@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace SportTrack.Logic.Model
 {
-    public class Context : DbContext
+    public class localsql : DbContext
     {
         public DbSet<Objective> Objectives { get; set; }
         public DbSet<User> User { get; set; }
-        public Context() : base("localsql")
+        public localsql() : base("localsql")
         {
 
         }

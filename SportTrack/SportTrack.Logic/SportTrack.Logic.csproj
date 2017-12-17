@@ -61,6 +61,14 @@
     <Compile Include="Migrations\201712171433448_initial.Designer.cs">
       <DependentUpon>201712171433448_initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712171522176_test.cs" />
+    <Compile Include="Migrations\201712171522176_test.Designer.cs">
+      <DependentUpon>201712171522176_test.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712171610248_test2.cs" />
+    <Compile Include="Migrations\201712171610248_test2.Designer.cs">
+      <DependentUpon>201712171610248_test2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Context.cs" />
     <Compile Include="Model\ModelRepository.cs" />
@@ -83,6 +91,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201712171433448_initial.resx">
       <DependentUpon>201712171433448_initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712171522176_test.resx">
+      <DependentUpon>201712171522176_test.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712171610248_test2.resx">
+      <DependentUpon>201712171610248_test2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
