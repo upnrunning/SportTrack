@@ -33,7 +33,7 @@ namespace SportTrack.UI
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
             InitializeComponent();
             LoadingGif.Source = new Uri(projectRootDirectory + @"\..\loading.gif");
-            LoadingGif2.Source = new Uri(projectRootDirectory + @"\..\loading.gif");
+            LoadingGif2.Source = new Uri(projectRootDirectory + @"\..\loading2.gif");
             Sponsor.Source = new BitmapImage(new Uri(projectRootDirectory + @"\..\3NWzq6NI58Y.jpg"));
             Sponsor2.Source = new BitmapImage(new Uri(projectRootDirectory + @"\..\qFGrsz8RhOQ.jpg"));
 

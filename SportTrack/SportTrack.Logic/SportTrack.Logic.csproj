@@ -57,6 +57,10 @@
     <Compile Include="BingModel\Image.cs" />
     <Compile Include="BingModel\Provider.cs" />
     <Compile Include="BingRepository.cs" />
+    <Compile Include="Migrations\201712171433448_initial.cs" />
+    <Compile Include="Migrations\201712171433448_initial.Designer.cs">
+      <DependentUpon>201712171433448_initial.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Context.cs" />
     <Compile Include="Model\ModelRepository.cs" />
@@ -76,6 +80,10 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201712171433448_initial.resx">
+      <DependentUpon>201712171433448_initial.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
