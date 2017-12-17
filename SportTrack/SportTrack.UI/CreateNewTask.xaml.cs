@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,18 +21,39 @@ namespace SportTrack.UI
     /// </summary>
     public partial class CreateNewTask : Window
     {
-        Context context = new Context();
+        localsql context = new localsql();
         ModelRepository add = new ModelRepository();
-        public CreateNewTask()
+        public CreateNewTask(Objective item)
         {
+            if (item.Name != null)
+            {
+                InitializeComponent();
+                NameForTask.Text = item.Name.ToString();
+                DescriptionOfTask.Text = item.Description.ToString();
+                First_Date.SelectedDate = item.StartingDay;
+                Second_Date.SelectedDate = item.LastDay;
+                if (item.Type.ToString() == "Качественная")
+                {
+                    Quantitative.IsChecked = true;
+                    QuantitativeT.Text = item.Type.ToString();
+                }
+                else
+                {
+                    Qualitative.IsChecked = true;
+                    QualitativeT.Text = item.Type.ToString();
+                }
+            }
+            else
+            {
+                InitializeComponent();
+                DateTime a = new DateTime(1, 1, 1);
+                CalendarDateRange u = new CalendarDateRange(a, Convert.ToDateTime(DateTime.Today.AddDays(-1))); //блакаут для первого календаря 
+                First_Date.BlackoutDates.Clear();
+                First_Date.BlackoutDates.Add(u);
+                Second_Date.BlackoutDates.Clear();
+                Second_Date.BlackoutDates.Add(u);
+            }
             
-            InitializeComponent();
-            DateTime a = new DateTime(1, 1, 1);
-            CalendarDateRange u = new CalendarDateRange(a, Convert.ToDateTime(DateTime.Today.AddDays(-1))); //блакаут для первого календаря 
-            First_Date.BlackoutDates.Clear();
-            First_Date.BlackoutDates.Add(u);
-            Second_Date.BlackoutDates.Clear();
-            Second_Date.BlackoutDates.Add(u);
         }
         public IEnumerable<DateTime> EachDay(DateTime from, DateTime thru)
         {
@@ -64,24 +86,39 @@ namespace SportTrack.UI
                 s = "Качественная";
             }
             else s = "Количественная";
-            add.AddGoal(NameForTask.Text, DescriptionOfTask.Text, First_Date.DisplayDate, Second_Date.DisplayDate, s);
+            add.AddGoal(NameForTask.Text, DescriptionOfTask.Text, First_Date.SelectedDate.Value, Second_Date.SelectedDate.Value, s);
+            MessageBox.Show(Second_Date.SelectedDate.ToString());
             MainWindow a = new MainWindow();
-            a.Close();
             a.Show();
+            this.Close();
+           
+            
+            
             
         }
 
-        private void f1_IsMouseDirectlyOverChanged(object sender, DependencyPropertyChangedEventArgs e)
+        private void Qualitative_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             TextQualitative.Visibility = Visibility.Collapsed;
             TaskForQualitative.Visibility = Visibility.Collapsed;
             
         }
 
-        private void Qualitative_IsMouseDirectlyOverChanged(object sender, DependencyPropertyChangedEventArgs e)
+        private void Quantitative_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            TaskForQualitative.Visibility = Visibility.Visible;
-            TextQualitative.Visibility = Visibility.Visible;
+            //TaskForQualitative.Visibility = Visibility.Visible;
+            //TextQualitative.Visibility = Visibility.Visible;
+            CreateForQuantityTask open = new CreateForQuantityTask();
+            for (int i = 0; i < 1; i++)
+            {
+                
+                open.Show();
+                this.Close();
+            }
+            
+           
+            
+            
         }
     }
  }

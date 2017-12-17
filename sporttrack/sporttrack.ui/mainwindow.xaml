@@ -33,8 +33,7 @@
             </Grid.ColumnDefinitions>
             <Menu Grid.Column="0">
                 <MenuItem   Header="Settings"  HorizontalAlignment="Right" VerticalAlignment="Bottom"     Background="Bisque" >
-                    <MenuItem Header="Settings"></MenuItem>
-                    <MenuItem Header="Exit"></MenuItem>
+                    <MenuItem Header="Exit" Click="Exit"></MenuItem>
                 </MenuItem>
 
             </Menu>
@@ -58,33 +57,10 @@
                 <RowDefinition Height="*"></RowDefinition>
 
             </Grid.RowDefinitions>
-            <Button Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" Background="LightSalmon" Click="Button_Click">Create New Goal</Button>
+            <Button Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" Background="LightSalmon" Click="Button_CreateTask">Create New Goal</Button>
             <ScrollViewer Grid.Row="0">
                 <StackPanel x:Name="B" Grid.Row="0">
-                    <Grid Height="100" Width="521">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="20*"></ColumnDefinition>
-                            <ColumnDefinition Width="6*"></ColumnDefinition>
-                            <ColumnDefinition Width="3*"></ColumnDefinition>
-                            <ColumnDefinition Width="3*"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"></RowDefinition>
-                            <RowDefinition Height="*"></RowDefinition>
-                            <RowDefinition Height="*"></RowDefinition>
-                            <RowDefinition Height="*"></RowDefinition>
-                            <RowDefinition Height="*"></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <TextBlock Grid.RowSpan="2" Margin="10,5" FontSize="16">ЭТО ШТУКА ДЛЯ ИМЕНИ</TextBlock>
-                        <TextBlock Grid.Row="2" Grid.RowSpan="3" Margin="10,5" TextWrapping="Wrap">А ЗДЕСЬ БУДЕТ ЛЕЖАТЬ НАШ ДЕСКРИПТИОН, круто , да ??????????????????????</TextBlock>
-                        <TextBlock Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" Margin="5" FontSize="19">TIME LEFT:</TextBlock>
-                        <Label Grid.Column="2" Grid.RowSpan="2" Margin="5" HorizontalContentAlignment="Right" >4</Label>
-                        <TextBlock Grid.Column="3" Grid.RowSpan="2" Margin="5,5,5,10" VerticalAlignment="Center" >ДНЯ</TextBlock>
-                        <ProgressBar Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Minimum="0" Maximum="100" Value="66" ></ProgressBar>
-                        <Button Grid.Row="3" Grid.RowSpan="2" Grid.Column="1" Margin="0,5,5,5" Background="LavenderBlush">Edit</Button>
-                        <Button Grid.Row="3" Grid.RowSpan="2" Grid.Column="2" Grid.ColumnSpan="2" Margin="5" Background="Red">Delete</Button>
-
-                    </Grid>
+                    
 
                 </StackPanel>
             </ScrollViewer>
@@ -105,7 +81,7 @@
                 <RadioButton IsMouseDirectlyOverChanged="RadioButton_SportChanged" VerticalAlignment="Bottom" Margin="0,0,-3,0" HorizontalContentAlignment="Left" HorizontalAlignment="Center" FlowDirection="RightToLeft">NFL</RadioButton>
                 <RadioButton IsMouseDirectlyOverChanged="RadioButton_SportChanged" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1">MLB</RadioButton>
                 <RadioButton IsMouseDirectlyOverChanged="RadioButton_SportChanged" VerticalAlignment="Bottom" HorizontalAlignment="Center" Grid.Column="1">NBA</RadioButton>
-                <Label Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalContentAlignment="Center">CHOOOSE YOUR SPORT BEATCH</Label>
+                <Label Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalContentAlignment="Center" >Select the news you are interested in</Label>
             </Grid>
             <Image Margin="10"  Grid.Row="1" x:Name="Sponsor"></Image>
             <Image Margin="10"  Grid.Row="2" x:Name="Sponsor2"></Image>
