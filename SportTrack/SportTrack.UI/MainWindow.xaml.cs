@@ -187,7 +187,7 @@ namespace SportTrack.UI
         public async void LoadStandings(string sport)
         {
             SportsFeedRepository sportsFeed = new SportsFeedRepository();
-            await sportsFeed.SportsFeedGetDataAsync(sport, 2016, "regular", new DateTime(2016, 10, 10));
+            await sportsFeed.SportsFeedGetDataAsync(sport, 2016, "regular");
             //LoadingGif2.Visibility = Visibility.Collapsed;
            // LoadingGif2.Stop();
             }
@@ -298,6 +298,11 @@ namespace SportTrack.UI
             SignIn login = new SignIn();
             login.Show();
             this.Close();
+        }
+
+        private void seasonComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     } 
 }
