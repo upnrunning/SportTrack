@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:SportTrack.UI"
         mc:Ignorable="d"
         Title="MainWindow" Height="840" Width="1200" ResizeMode="NoResize">
-    <Grid x:Name="A" ShowGridLines="True">
+    <Grid x:Name="MainGrid" ShowGridLines="True">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="12*"></RowDefinition>

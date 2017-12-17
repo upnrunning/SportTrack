@@ -28,7 +28,7 @@
                 <RowDefinition Height="*"></RowDefinition>
 
             </Grid.RowDefinitions>
-            <DatePicker  Name="First_Date" SelectedDateChanged="AAAAA_SelectedDateChanged" Grid.Row="0" ></DatePicker>
+            <DatePicker  Name="First_Date"  Grid.Row="0" ></DatePicker>
             <DatePicker Name="Second_Date" Grid.Row="2" ></DatePicker>
         </Grid>
         <TextBlock Grid.Row="4" Text="Desired Result:" TextWrapping="Wrap" FontSize="23" ></TextBlock>
@@ -44,15 +44,15 @@
         <Label VerticalAlignment="Top" Margin="0,10,0,0" HorizontalAlignment="Center" Content="Name"></Label>
         <Label VerticalAlignment="Bottom" HorizontalAlignment="Center" Content="Description"></Label>
         <TextBox x:Name="DescriptionOfTask" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="10,55,10,5"></TextBox>
-        <Label VerticalAlignment="Center" HorizontalAlignment="Center" Content="тип цели" Grid.Row="1"></Label>
+        <Label VerticalAlignment="Center" HorizontalAlignment="Center" Content="Goal's type" Grid.Row="1"></Label>
         <Label VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="2">
             <Label.Content>
-                <TextBlock TextWrapping="Wrap">тут дата</TextBlock>
+                <TextBlock TextWrapping="Wrap">Choose date</TextBlock>
             </Label.Content>
         </Label>
         <Label VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,15" Grid.Row="3">
             <Label.Content>
-                <TextBlock TextWrapping="Wrap">Частота</TextBlock>
+                <TextBlock TextWrapping="Wrap">Frequency</TextBlock>
             </Label.Content>
         </Label>
         <TextBlock x:Name="TextQualitative" VerticalAlignment="Top" HorizontalAlignment="Center" Grid.Row="3" TextWrapping="Wrap" Visibility="Collapsed" >Введите число описывающее вашу цель</TextBlock>
@@ -63,8 +63,8 @@
             </Grid.RowDefinitions>
             <RadioButton x:Name="Quantitative" VerticalAlignment="Center"  IsEnabledChanged="Quantitative_IsMouseDirectlyOverChanged"></RadioButton>
             <RadioButton x:Name="Qualitative" VerticalAlignment="Center" Grid.Row="1" IsChecked="True"  IsEnabledChanged="Qualitative_IsMouseDirectlyOverChanged"></RadioButton>
-            <TextBlock x:Name="QuantitativeT" Margin="20,10" FontSize="21">Качественная</TextBlock>
-            <TextBlock x:Name="QualitativeT" Margin="20,10" Grid.Row="1" FontSize="21">Количественная</TextBlock>
+            <TextBlock x:Name="QuantitativeT" Margin="20,10" FontSize="21">Quantitative</TextBlock>
+            <TextBlock x:Name="QualitativeT" Margin="20,10" Grid.Row="1" FontSize="21">Qualitiative</TextBlock>
         </Grid>
     </Grid>
 </Window>

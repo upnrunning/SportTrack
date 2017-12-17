@@ -32,7 +32,7 @@ namespace SportTrack.UI
                 DescriptionOfTask.Text = item.Description.ToString();
                 First_Date.SelectedDate = item.StartingDay;
                 Second_Date.SelectedDate = item.LastDay;
-                if (item.Type.ToString() == "Качественная")
+                if (item.Type.ToString() == "Qualitative")
                 {
                     Quantitative.IsChecked = true;
                     QuantitativeT.Text = item.Type.ToString();
@@ -46,12 +46,12 @@ namespace SportTrack.UI
             else
             {
                 InitializeComponent();
-                DateTime a = new DateTime(1, 1, 1);
-                CalendarDateRange u = new CalendarDateRange(a, Convert.ToDateTime(DateTime.Today.AddDays(-1))); //блакаут для первого календаря 
+                DateTime dt = new DateTime(1, 1, 1);
+                CalendarDateRange calendardr = new CalendarDateRange(dt, Convert.ToDateTime(DateTime.Today.AddDays(-1))); //блакаут для первого календаря 
                 First_Date.BlackoutDates.Clear();
-                First_Date.BlackoutDates.Add(u);
+                First_Date.BlackoutDates.Add(calendardr);
                 Second_Date.BlackoutDates.Clear();
-                Second_Date.BlackoutDates.Add(u);
+                Second_Date.BlackoutDates.Add(calendardr);
             }
             
         }
@@ -62,19 +62,19 @@ namespace SportTrack.UI
         }
 
 
-        private void AAAAA_SelectedDateChanged(object sender, SelectionChangedEventArgs e) //блэкаут для второго календаря
+        private void Fd_SelectedDateChanged(object sender, SelectionChangedEventArgs e) //блэкаут для второго календаря
         {
             DateTime a = new DateTime(1, 1, 1);
-            DateTime? b = First_Date.SelectedDate;
+            DateTime? firstdate = First_Date.SelectedDate;
             if (First_Date.SelectedDate != null)
             {
-                b = First_Date.SelectedDate;
+                firstdate = First_Date.SelectedDate;
             }
 
 
-            CalendarDateRange r = new CalendarDateRange(a, Convert.ToDateTime(b));
+            CalendarDateRange calendardr = new CalendarDateRange(a, Convert.ToDateTime(firstdate));
             Second_Date.BlackoutDates.Clear();
-            Second_Date.BlackoutDates.Add(r);
+            Second_Date.BlackoutDates.Add(calendardr);
 
         }
 
@@ -83,13 +83,13 @@ namespace SportTrack.UI
             string s = null;
             if (Qualitative.IsChecked == false)
             {
-                s = "Качественная";
+                s = "Qualitative";
             }
-            else s = "Количественная";
+            else s = "Quantitative";
             add.AddGoal(NameForTask.Text, DescriptionOfTask.Text, First_Date.SelectedDate.Value, Second_Date.SelectedDate.Value, s);
             MessageBox.Show(Second_Date.SelectedDate.ToString());
-            MainWindow a = new MainWindow();
-            a.Show();
+            MainWindow mw = new MainWindow();
+            mw.Show();
             this.Close();
            
             

@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SportTrack.UI"
         mc:Ignorable="d"
-        Title="Brouser" Height="800" Width="800">
+        Title="Brouser" Focusable="True" Height="800" Width="800">
     <Grid>
-        <WebBrowser Name="WebBrowser"></WebBrowser>
+        <WebBrowser  Name="WebBrowser"></WebBrowser>
     </Grid>
 </Window>

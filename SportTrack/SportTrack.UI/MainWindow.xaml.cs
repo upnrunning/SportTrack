@@ -48,7 +48,7 @@ namespace SportTrack.UI
                 
                 Grid DynamicGrid = new Grid
                 {
-                    Name = "aaaaname"
+                    Name = "Dynamic"
                 };
                 // Create Columns
                 ColumnDefinition gridCol1 = new ColumnDefinition();
@@ -194,10 +194,10 @@ namespace SportTrack.UI
 
         public async void LoadNews(string sport)
         {
-            BingRepository b = new BingRepository();
+            BingRepository repo = new BingRepository();
             try
             {
-                await b.GetBingDataAsync(sport + " news");
+                await repo.GetBingDataAsync(sport + " news");
                 if (Repository.SearchResults.Count == 0) throw new Exception("Trouble connecting to the server. Try again later");
                 LoadingGif.Stop();
                 LoadingGif.Visibility = Visibility.Collapsed;
@@ -205,7 +205,7 @@ namespace SportTrack.UI
                 News.Children.Clear();
                 for (int i = 0; i < Repository.SearchResults.Count; i++)
                 {
-                    A.ShowGridLines = false;
+                    MainGrid.ShowGridLines = false;
                     Hyperlink linkNews = new Hyperlink
                     {
                         NavigateUri = new Uri(Repository.SearchResults[i].Url)
@@ -263,8 +263,8 @@ namespace SportTrack.UI
 
         private void Button_CreateTask(object sender, RoutedEventArgs e)
         {
-            Objective test = new Objective();
-            CreateNewTask create = new CreateNewTask(test);
+            Objective obj = new Objective();
+            CreateNewTask create = new CreateNewTask(obj);
             create.Show();
             this.Close();
 

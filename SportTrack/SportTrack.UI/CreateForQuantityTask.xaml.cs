@@ -25,11 +25,7 @@ namespace SportTrack.UI
             InitializeComponent();
         }
 
-        private void AAAAA_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
-        {
-            
-        }
-
+       
         private void Quantitative_IsMouseDirectlyOverChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             localsql a = new localsql();
