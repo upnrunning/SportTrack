@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using SportTrack.Logic;
 using System.IO;
 using System.Threading;
+using System.Net;
 
 namespace SportTrack.UI
 {
@@ -23,70 +24,87 @@ namespace SportTrack.UI
     /// </summary>
     public partial class MainWindow : Window
     {
-        string c;
-        BingRepository b = new BingRepository();
+        string projectRootDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
+        Repository r = new Repository();
+
+        
         public MainWindow()
         {
-            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
-            c = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
-
-            SportsFeedRepository sp = new SportsFeedRepository();
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
             InitializeComponent();
-            Repository r = new Repository();
-            //sp.SportsFeedGetDataAsync("nba", 2017, "playoff", new DateTime(2017, 04, 22), null);
-            LoadingGif.Source = new Uri(c + @"\..\loading.gif");
-            Sponsor.Source = new BitmapImage(new Uri(c + @"\..\3NWzq6NI58Y.jpg"));
-            Sponsor2.Source = new BitmapImage(new Uri(c + @"\..\qFGrsz8RhOQ.jpg"));
+            LoadingGif.Source = new Uri(projectRootDirectory + @"\..\loading.gif");
+            Sponsor.Source = new BitmapImage(new Uri(projectRootDirectory + @"\..\3NWzq6NI58Y.jpg"));
+            Sponsor2.Source = new BitmapImage(new Uri(projectRootDirectory + @"\..\qFGrsz8RhOQ.jpg"));
+
             LoadNews("nhl news");
             }
 
         public async void LoadNews(string sport)
         {
-           
-            await b.GetBingDataAsync(sport + " news");
-            LoadingGif.Stop();
-            LoadingGif.Visibility = Visibility.Collapsed;
-            loadingTextBlock.Visibility = Visibility.Collapsed;
-            News.Children.Clear();
-            for (int i = 0; i < Repository.SearchResults.Count; i++)
+            BingRepository b = new BingRepository();
+            try
             {
-                A.ShowGridLines = false;
-                Hyperlink a = new Hyperlink();
-                a.NavigateUri = new Uri(Repository.SearchResults[i].Url);
-                Image image = new Image();
-                image.Source = new BitmapImage(new Uri(c + @"\..\3NWzq6NI58Y.jpg"));
-                image.Height = 48;
-                image.Width = 48;
-                image.VerticalAlignment = VerticalAlignment.Top;
-                image.HorizontalAlignment = HorizontalAlignment.Left;
-                image.Margin = new Thickness(5);
-                TextBlock btn = new TextBlock();
-                btn.VerticalAlignment = VerticalAlignment.Top;
-                btn.Width = 120;
-                btn.Height = 38;
-                btn.Margin = new Thickness(55, 5, 5, 5);
-                a.Inlines.Add(Repository.SearchResults[i].Url);
-                btn.Inlines.Add(a);
-                btn.MaxWidth = 120;
-                btn.PreviewMouseDown += (s, e) => { TextBlock but = s as TextBlock; Hyperlink link = but.Inlines.FirstInline as Hyperlink; Browser aa = new Browser(link.NavigateUri); aa.Show(); };
-                TextBlock tb = new TextBlock();
-                tb.Name = "tb" + i.ToString();
-                tb.Text = Repository.SearchResults[i].Description;
-                tb.VerticalAlignment = VerticalAlignment.Center;
-                tb.Height = 100;
-                tb.TextWrapping = TextWrapping.Wrap;
-                tb.Margin = new Thickness(5, 30, 5, 0);
-                News.Children.Add(tb);
-                Grid.SetRow(tb, i / 5);
-                Grid.SetColumn(tb, i % 5);
-                News.Children.Add(btn);
-                Grid.SetColumn(btn, i % 5);
-                Grid.SetRow(btn, i / 5);
-                News.Children.Add(image);
-                Grid.SetRow(image, i / 5);
-                Grid.SetColumn(image, i % 5);
+                await b.GetBingDataAsync(sport + " news");
+                if (Repository.SearchResults.Count == 0) throw new Exception("Trouble connecting to the server. Try again later");
+                LoadingGif.Stop();
+                LoadingGif.Visibility = Visibility.Collapsed;
+                loadingTextBlock.Visibility = Visibility.Collapsed;
+                News.Children.Clear();
+                for (int i = 0; i < Repository.SearchResults.Count; i++)
+                {
+                    A.ShowGridLines = false;
+                    Hyperlink linkNews = new Hyperlink
+                    {
+                        NavigateUri = new Uri(Repository.SearchResults[i].Url)
+                    };
+                    Image image = new Image
+                    {
+                        Source = new BitmapImage(new Uri(projectRootDirectory + @"\..\3NWzq6NI58Y.jpg")),
+                        Height = 48,
+                        Width = 48,
+                        VerticalAlignment = VerticalAlignment.Top,
+                        HorizontalAlignment = HorizontalAlignment.Left,
+                        Margin = new Thickness(5)
+                    };
+                    TextBlock linkTextBlock = new TextBlock
+                    {
+                        VerticalAlignment = VerticalAlignment.Top,
+                        Width = 120,
+                        Height = 38,
+                        Margin = new Thickness(55, 5, 5, 5)
+                    };
+                    a.Inlines.Add(Repository.SearchResults[i].Url);
+                    linkTextBlock.Inlines.Add(a);
+                    linkTextBlock.MaxWidth = 120;
+                    linkTextBlock.PreviewMouseDown += (s, e) => { TextBlock chosenLink = s as TextBlock; Hyperlink link = chosenLink.Inlines.FirstInline as Hyperlink; Browser aa = new Browser(link.NavigateUri); aa.Show(); };
+                    TextBlock desciptionTextBlock = new TextBlock
+                    {
+                        Name = "tb" + i.ToString(),
+                        Text = Repository.SearchResults[i].Description,
+                        VerticalAlignment = VerticalAlignment.Center,
+                        Height = 100,
+                        TextWrapping = TextWrapping.Wrap,
+                        Margin = new Thickness(5, 30, 5, 0)
+                    };
+                    News.Children.Add(desciptionTextBlock);
+                    Grid.SetRow(desciptionTextBlock, i / 5);
+                    Grid.SetColumn(desciptionTextBlock, i % 5);
+                    News.Children.Add(linkTextBlock);
+                    Grid.SetColumn(linkTextBlock, i % 5);
+                    Grid.SetRow(linkTextBlock, i / 5);
+                    News.Children.Add(image);
+                    Grid.SetRow(image, i / 5);
+                    Grid.SetColumn(image, i % 5);
 
+                }
             }
+
+            catch (Exception e)
+            {
+                News.Children.Clear();
+                MessageBox.Show(e.Message);
+            }
+            
 
         }
         
@@ -216,8 +234,8 @@ namespace SportTrack.UI
 
         private void RadioButton_SportChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            RadioButton ikikkk = sender as RadioButton;
-            string sport = ikikkk.Content.ToString();
+            RadioButton _selectedSport = sender as RadioButton;
+            string sport = _selectedSport.Content.ToString();
             
             LoadingGif.Visibility = Visibility.Visible;
             LoadingGif.Play();

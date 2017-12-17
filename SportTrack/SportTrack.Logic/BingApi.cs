@@ -15,15 +15,19 @@ namespace SportTrack.Logic
         public async Task<string> BingRequestNews(string query)
         {
             using (var client = new HttpClient())
-            { 
-                client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", accessKey);
-                var queryString = HttpUtility.ParseQueryString(string.Empty);
-                queryString["q"] = query; 
-                queryString["mkt"] = "en-US";
-                queryString["count"] = Convert.ToString(_responseCount);
-                string url = uriBase + queryString;
-                _responseJSON = await client.GetStringAsync(url);
-                return _responseJSON;
+            {
+                try
+                {
+                    client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", accessKey);
+                    var queryString = HttpUtility.ParseQueryString(string.Empty);
+                    queryString["q"] = query;
+                    queryString["mkt"] = "en-US";
+                    queryString["count"] = Convert.ToString(_responseCount);
+                    string url = uriBase + queryString;
+                    _responseJSON = await client.GetStringAsync(url);
+                    return _responseJSON;
+                }
+                catch (Exception e) { return null; }
             }
         }
 
