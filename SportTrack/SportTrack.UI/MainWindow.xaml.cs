@@ -33,11 +33,21 @@ namespace SportTrack.UI
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
             InitializeComponent();
             LoadingGif.Source = new Uri(projectRootDirectory + @"\..\loading.gif");
+            LoadingGif2.Source = new Uri(projectRootDirectory + @"\..\loading.gif");
             Sponsor.Source = new BitmapImage(new Uri(projectRootDirectory + @"\..\3NWzq6NI58Y.jpg"));
             Sponsor2.Source = new BitmapImage(new Uri(projectRootDirectory + @"\..\qFGrsz8RhOQ.jpg"));
 
-            LoadNews("nhl news");
+            LoadNews("nhl news"); // NHL news and standings are loaded by default
+            LoadStandings("nhl");
             }
+
+        public async void LoadStandings(string sport)
+        {
+            SportsFeedRepository sportsFeed = new SportsFeedRepository();
+            await sportsFeed.SportsFeedGetDataAsync(sport, 2016, "regular", new DateTime(2016, 10, 10));
+            LoadingGif2.Visibility = Visibility.Collapsed;
+            LoadingGif2.Stop();
+        }
 
         public async void LoadNews(string sport)
         {
@@ -59,9 +69,9 @@ namespace SportTrack.UI
                     };
                     Image image = new Image
                     {
-                        Source = new BitmapImage(new Uri(projectRootDirectory + @"\..\3NWzq6NI58Y.jpg")),
-                        Height = 48,
-                        Width = 48,
+                        Source = new BitmapImage(new Uri(Repository.SearchResults[i].Image.ThumbNail.ContentUrl)),
+                        Height = 32,
+                        Width = 32,
                         VerticalAlignment = VerticalAlignment.Top,
                         HorizontalAlignment = HorizontalAlignment.Left,
                         Margin = new Thickness(5)
@@ -73,8 +83,8 @@ namespace SportTrack.UI
                         Height = 38,
                         Margin = new Thickness(55, 5, 5, 5)
                     };
-                    a.Inlines.Add(Repository.SearchResults[i].Url);
-                    linkTextBlock.Inlines.Add(a);
+                    linkNews.Inlines.Add(Repository.SearchResults[i].Url);
+                    linkTextBlock.Inlines.Add(linkNews);
                     linkTextBlock.MaxWidth = 120;
                     linkTextBlock.PreviewMouseDown += (s, e) => { TextBlock chosenLink = s as TextBlock; Hyperlink link = chosenLink.Inlines.FirstInline as Hyperlink; Browser aa = new Browser(link.NavigateUri); aa.Show(); };
                     TextBlock desciptionTextBlock = new TextBlock
@@ -240,7 +250,12 @@ namespace SportTrack.UI
             LoadingGif.Visibility = Visibility.Visible;
             LoadingGif.Play();
             loadingTextBlock.Visibility = Visibility.Visible;
+
+            LoadingGif2.Play();
+            LoadingGif2.Visibility = Visibility.Visible;
+            
             LoadNews(sport);
+            LoadStandings(sport);
         }
 
         private void LoadingGif_MediaEnded(object sender, RoutedEventArgs e)

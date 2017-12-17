@@ -23,90 +23,86 @@ namespace SportTrack.Logic
 
        
 
-        public async void SportsFeedGetDataAsync(string sport, int SeasonYear, string LeagueStructure, DateTime date, List<string> additionalParams)
+        public async Task SportsFeedGetDataAsync(string sport, int SeasonYear, string LeagueStructure, DateTime date)
 
         {
             if (!Repository.RequestDates.ContainsKey(sport) || Repository.RequestDates[sport] < DateTime.Now.AddHours(-6))
             {
                 SportsFeedApi sportsFeedApi = new SportsFeedApi();
-                _scoreBoardJson = await sportsFeedApi.RequestScoreBoard(sport, SeasonYear, LeagueStructure, date, additionalParams);
-                //_gameStatsJson = await sportsFeedApi.RequestGameStats(sport, SeasonYear, LeagueStructure, additionalParams);
-                _overallSchedJson = await sportsFeedApi.RequestOverallSchedule(sport, SeasonYear, LeagueStructure, additionalParams);
-                _overallStandings = await sportsFeedApi.RequestOverallStandings(sport, SeasonYear, LeagueStructure, additionalParams);
-                _divisionStandings = await sportsFeedApi.RequestDivisionStandnings(sport, SeasonYear, LeagueStructure, additionalParams);
-                _conferenceStandings = await sportsFeedApi.RequestConferenceStandings(sport, SeasonYear, LeagueStructure, additionalParams);
-                _playoffStandings = await sportsFeedApi.RequestPlayoffStandings(sport, SeasonYear, LeagueStructure, additionalParams);
+                _scoreBoardJson = await sportsFeedApi.RequestScoreBoard(sport, SeasonYear, LeagueStructure, date);
+
+                _overallSchedJson = await sportsFeedApi.RequestOverallSchedule(sport, SeasonYear, LeagueStructure);
+                _overallStandings = await sportsFeedApi.RequestOverallStandings(sport, SeasonYear, LeagueStructure);
+                _divisionStandings = await sportsFeedApi.RequestDivisionStandnings(sport, SeasonYear, LeagueStructure);
+                _conferenceStandings = await sportsFeedApi.RequestConferenceStandings(sport, SeasonYear, LeagueStructure);
+                _playoffStandings = await sportsFeedApi.RequestPlayoffStandings(sport, SeasonYear, LeagueStructure);
                 DeserializeJson(_scoreBoardJson, _overallSchedJson, _overallStandings, _divisionStandings, _conferenceStandings, _playoffStandings);
                 Repository.RequestDates[sport] = DateTime.Now;
             }
-            else return; // Do nothing(?)... (Don't know yet what will happen here)
+            else return;
         }
 
         private void DeserializeJson(string scoreboardJSON, string overallJSON, string overallStandings, string divisionStandings, string conferenceStandings, string playoffStandings)
         {
-            Repository.ScoreBoardList.Clear();
-            //Repository.GameLogsList.Clear();
-            Repository.ScheduleList.Clear();
-            Repository.OverallStandings.Clear();
-            Repository.PlayOffStandings.Clear();
-            Repository.DivisionStandings.Clear();
-            Repository.ConferenceStandings.Clear();
-
-            JObject sportsFeedSchedule = JObject.Parse(overallJSON); // if == null catch exception? (No games were found for this date)
-            IList<JToken> games = sportsFeedSchedule["fullgameschedule"]["gameentry"].Children().ToList();
-            foreach (var item in games)
+            try
             {
-                GameEntry gameentry = item.ToObject<GameEntry>();
-                Repository.ScheduleList.Add(gameentry);
+                Repository.ScoreBoardList.Clear();
+                Repository.ScheduleList.Clear();
+                Repository.OverallStandings.Clear();
+                Repository.PlayOffStandings.Clear();
+                Repository.DivisionStandings.Clear();
+                Repository.ConferenceStandings.Clear();
+
+                JObject sportsFeedSchedule = JObject.Parse(overallJSON); // if == null catch exception? (No games were found for this date)
+                IList<JToken> games = sportsFeedSchedule["fullgameschedule"]["gameentry"].Children().ToList();
+                foreach (var item in games)
+                {
+                    GameEntry gameentry = item.ToObject<GameEntry>();
+                    Repository.ScheduleList.Add(gameentry);
+                }
+
+                JObject scoreBoards = JObject.Parse(scoreboardJSON);
+                IList<JToken> scores = scoreBoards["scoreboard"]["gameScore"].Children().ToList();
+                foreach (var item in scores)
+                {
+                    ScoreBoard scoreboard = item.ToObject<ScoreBoard>();
+                    Repository.ScoreBoardList.Add(scoreboard);
+                }
+
+                JObject overallStand = JObject.Parse(overallStandings);
+                IList<JToken> ovStands = overallStand["overallteamstandings"]["teamstandingsentry"].Children().ToList();
+                foreach (var item in ovStands)
+                {
+                    TeamEntry standing = item.ToObject<TeamEntry>();
+                    Repository.OverallStandings.Add(standing);
+                }
+
+                JObject conferenceStand = JObject.Parse(conferenceStandings);
+                IList<JToken> confStands = conferenceStand["conferenceteamstandings"]["conference"].Children().ToList();
+                foreach (var item in confStands)
+                {
+                    Structure standing = item.ToObject<Structure>();
+                    Repository.ConferenceStandings.Add(standing);
+                }
+
+                JObject divisionStand = JObject.Parse(divisionStandings);
+                IList<JToken> divisionStands = divisionStand["divisionteamstandings"]["division"].Children().ToList();
+                foreach (var item in divisionStands)
+                {
+                    Structure standing = item.ToObject<Structure>();
+                    Repository.DivisionStandings.Add(standing);
+                }
+
+                JObject playoffStand = JObject.Parse(playoffStandings);
+                IList<JToken> playoffStands = playoffStand["playoffteamstandings"]["conference"].Children().ToList();
+                foreach (var item in playoffStands)
+                {
+                    Structure standing = item.ToObject<Structure>();
+                    Repository.PlayOffStandings.Add(standing);
+                }
             }
 
-            JObject scoreBoards = JObject.Parse(scoreboardJSON);
-            IList<JToken> scores = scoreBoards["scoreboard"]["gameScore"].Children().ToList();
-            foreach(var item in scores)
-            {
-                ScoreBoard scoreboard = item.ToObject<ScoreBoard>();
-                Repository.ScoreBoardList.Add(scoreboard);
-            }
-
-            //JObject statistic = JObject.Parse(gamestatsJSON);
-            //IList<JToken> stats = statistic["teamgamelogs"]["gamelogs"].Children().ToList();
-            //foreach (var item in stats)
-            //{
-            //    GameLog gamelog = item.ToObject<GameLog>();
-            //    Repository.GameLogsList.Add(gamelog);
-            //}
-
-            JObject overallStand = JObject.Parse(overallStandings);
-            IList<JToken> ovStands = overallStand["overallteamstandings"]["teamstandingsentry"].Children().ToList();
-            foreach (var item in ovStands)
-            {
-                TeamEntry standing = item.ToObject<TeamEntry>();
-                Repository.OverallStandings.Add(standing);
-            }
-
-            JObject conferenceStand = JObject.Parse(conferenceStandings);
-            IList<JToken> confStands = conferenceStand["conferenceteamstandings"]["conference"].Children().ToList();
-            foreach (var item in confStands)
-            {
-                Structure standing = item.ToObject<Structure>();
-                Repository.ConferenceStandings.Add(standing);
-            }
-
-            JObject divisionStand = JObject.Parse(divisionStandings);
-            IList<JToken> divisionStands = divisionStand["divisionteamstandings"]["division"].Children().ToList();
-            foreach (var item in divisionStands)
-            {
-                Structure standing = item.ToObject<Structure>();
-                Repository.DivisionStandings.Add(standing);
-            }
-
-            JObject playoffStand = JObject.Parse(playoffStandings);
-            IList<JToken> playoffStands = playoffStand["playoffteamstandings"]["conference"].Children().ToList();
-            foreach (var item in playoffStands)
-            {
-                Structure standing = item.ToObject<Structure>();
-                Repository.PlayOffStandings.Add(standing);
-            }
+            catch(Exception) { return; }
         }
     }
 }

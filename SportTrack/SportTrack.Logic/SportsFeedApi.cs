@@ -53,7 +53,7 @@ namespace SportTrack.Logic
 
         }
 
-        public async Task<string> RequestDailySchedule(string sport, int seasonYear, string leagueStructure, DateTime fordate, List<string> additionalParams)
+        public async Task<string> RequestDailySchedule(string sport, int seasonYear, string leagueStructure, DateTime fordate)
         {
             using (var client = new HttpClient())
             {
@@ -67,7 +67,7 @@ namespace SportTrack.Logic
             }
         }
 
-        public async Task<string> RequestScoreBoard(string sport, int seasonYear, string leagueStructure, DateTime fordate, List<string> additionalParams)
+        public async Task<string> RequestScoreBoard(string sport, int seasonYear, string leagueStructure, DateTime fordate)
         {
             using (var client = new HttpClient())
             {
@@ -81,7 +81,7 @@ namespace SportTrack.Logic
             }
         }
 
-        public async Task<string> RequestGameStats(string sport, int seasonYear, string leagueStructure, List<string> additionalParams)
+        public async Task<string> RequestGameStats(string sport, int seasonYear, string leagueStructure)
         {
             using (var client = new HttpClient())
             {
@@ -94,7 +94,7 @@ namespace SportTrack.Logic
             }
         }
 
-        public async Task<string> RequestOverallSchedule(string sport, int seasonYear, string leagueStructure, List<string> additionalParams)
+        public async Task<string> RequestOverallSchedule(string sport, int seasonYear, string leagueStructure)
         {
             using (var client = new HttpClient())
             {
@@ -108,14 +108,14 @@ namespace SportTrack.Logic
             }
         }
 
-        public async Task<string> RequestOverallStandings(string sport, int seasonYear, string leagueStructure, List<string> additionalParams)
+        public async Task<string> RequestOverallStandings(string sport, int seasonYear, string leagueStructure)
         {
             using (var client = new HttpClient())
             {
                 
                 // Here goes the processing of all optional parameters...
                 string structure = FormatStructure(seasonYear, leagueStructure);
-                string url = $"https://api.mysportsfeeds.com/v1.1/pull/{sport}/{structure}/overall_team_standings.json?teamstats="+_sportStats[sport];
+                string url = $"https://api.mysportsfeeds.com/v1.1/pull/{sport}/{structure}/overall_team_standings.json?teamstats="+_sportStats[sport.ToLower()];
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Base64Encode("upnrunning" + ":" + "teamprojectsharp"));
                 string JsonEncodedResponse = await client.GetStringAsync(url);
                 return JsonEncodedResponse;
@@ -123,13 +123,13 @@ namespace SportTrack.Logic
             }
         }
 
-        public async Task<string> RequestConferenceStandings(string sport, int seasonYear, string leagueStructure, List<string> additionalParams)
+        public async Task<string> RequestConferenceStandings(string sport, int seasonYear, string leagueStructure)
         {
             using (var client = new HttpClient())
             {
                 // Here goes the processing of all optional parameters...
                 string structure = FormatStructure(seasonYear, leagueStructure);
-                string url = $"https://api.mysportsfeeds.com/v1.1/pull/{sport}/{structure}/conference_team_standings.json?teamstats=" + _sportStats[sport];
+                string url = $"https://api.mysportsfeeds.com/v1.1/pull/{sport}/{structure}/conference_team_standings.json?teamstats=" + _sportStats[sport.ToLower()];
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Base64Encode("upnrunning" + ":" + "teamprojectsharp"));
                 string JsonEncodedResponse = await client.GetStringAsync(url);
                 return JsonEncodedResponse;
@@ -137,13 +137,13 @@ namespace SportTrack.Logic
             }
         }
 
-        public async Task<string> RequestDivisionStandnings(string sport, int seasonYear, string leagueStructure, List<string> additionalParams)
+        public async Task<string> RequestDivisionStandnings(string sport, int seasonYear, string leagueStructure)
         {
             using (var client = new HttpClient())
             {
                 // Here goes the processing of all optional parameters...
                 string structure = FormatStructure(seasonYear, leagueStructure);
-                string url = $"https://api.mysportsfeeds.com/v1.1/pull/{sport}/{structure}/division_team_standings.json?teamstats=" + _sportStats[sport];
+                string url = $"https://api.mysportsfeeds.com/v1.1/pull/{sport}/{structure}/division_team_standings.json?teamstats=" + _sportStats[sport.ToLower()];
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Base64Encode("upnrunning" + ":" + "teamprojectsharp"));
                 string JsonEncodedResponse = await client.GetStringAsync(url);
                 return JsonEncodedResponse;
@@ -151,13 +151,13 @@ namespace SportTrack.Logic
             }
         }
 
-        public async Task<string> RequestPlayoffStandings(string sport, int seasonYear, string leagueStructure, List<string> additionalParams)
+        public async Task<string> RequestPlayoffStandings(string sport, int seasonYear, string leagueStructure)
         {
             using (var client = new HttpClient())
             {
                 // Here goes the processing of all optional parameters...
                 string structure = FormatStructure(seasonYear, leagueStructure);
-                string url = $"https://api.mysportsfeeds.com/v1.1/pull/{sport}/{structure}/playoff_team_standings.json?teamstats=" + _sportStats[sport];
+                string url = $"https://api.mysportsfeeds.com/v1.1/pull/{sport}/{structure}/playoff_team_standings.json?teamstats=" + _sportStats[sport.ToLower()];
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Base64Encode("upnrunning" + ":" + "teamprojectsharp"));
                 string JsonEncodedResponse = await client.GetStringAsync(url);
                 return JsonEncodedResponse;

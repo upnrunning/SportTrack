@@ -27,7 +27,7 @@ namespace SportTrack.Logic
                     _responseJSON = await client.GetStringAsync(url);
                     return _responseJSON;
                 }
-                catch (Exception e) { return null; }
+                catch (Exception) { return null; }
             }
         }
 
