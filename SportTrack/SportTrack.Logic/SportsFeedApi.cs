@@ -20,10 +20,10 @@ namespace SportTrack.Logic
 
         private Dictionary<string, string> _sportStats = new Dictionary<string, string>  // which parameters to get for each sport
     {
-        {"nba", "W,L,PTS,PTSA" },
+        {"nba", "W,L,PTS,PTSA,F"},
         {"nhl", "W,L,GF,GA,Pts"},
         {"nfl", "W,L,T,PF,PA"},
-        {"mlb", "W,L,RF,RA" }
+        {"mlb", "W,L,RF,RA,AB" }
     };
 
         private string Base64Encode(string plainText)

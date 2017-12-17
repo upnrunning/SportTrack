@@ -18,13 +18,26 @@
             <ColumnDefinition Width="4*"></ColumnDefinition>
             <ColumnDefinition Width="2*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-           
 
-        <ListView x:Name="StandingsListView" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2">
-            <MediaElement Height="256" Width="256" x:Name="LoadingGif2" VerticalAlignment="Center" HorizontalAlignment="Center" MediaEnded="LoadingGif_MediaEnded" UnloadedBehavior="Manual" LoadedBehavior="Play" Stretch="None"/>
+        
+        <ListView x:Name="StandingsListView" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" ItemsSource="{Binding Repository.OverallStandings}">
+
+            <ListView.View>
+                
+                <GridView x:Name="gridList">
+                    <GridViewColumn Header="Rank" Width="30" DisplayMemberBinding="{Binding Rank}"/>
+                    <GridViewColumn Header="Name" Width="100" DisplayMemberBinding="{Binding Team.Name}"/>
+                    <GridViewColumn Header="Games played" Width="100" DisplayMemberBinding="{Binding Stats.GamesPlayed.Value}"/>
+                    <GridViewColumn Header="Stats" Width="auto" DisplayMemberBinding="{Binding Stats.OutputStats, Delay=15}"></GridViewColumn>
+                </GridView>
+                
+            </ListView.View>
+            
         </ListView>
+        
+        
 
-             
+
         <Grid Grid.Column="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"></ColumnDefinition>
@@ -38,11 +51,9 @@
                 </MenuItem>
 
             </Menu>
-            <ComboBox Grid.Column="1">
-                <TextBlock>NFL</TextBlock>
-                <TextBlock>NBA</TextBlock>
-                <TextBlock>NHL</TextBlock>
-                <TextBlock>MLB</TextBlock>
+            <ComboBox SelectedIndex="1" x:Name="seasonComboBox" Grid.Column="1" SelectionChanged="seasonComboBox_SelectionChanged">
+                <TextBlock>2016 Regular</TextBlock>
+                <TextBlock>2017 Regular</TextBlock>
             </ComboBox>
         </Grid>
             
@@ -101,10 +112,10 @@
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <RadioButton IsMouseDirectlyOverChanged="RadioButton_SportChanged" VerticalAlignment="Center"  HorizontalAlignment="Center" IsChecked="True" FlowDirection="RightToLeft" >NHL</RadioButton>
-                <RadioButton IsMouseDirectlyOverChanged="RadioButton_SportChanged" VerticalAlignment="Bottom" Margin="0,0,-3,0" HorizontalContentAlignment="Left" HorizontalAlignment="Center" FlowDirection="RightToLeft">NFL</RadioButton>
-                <RadioButton IsMouseDirectlyOverChanged="RadioButton_SportChanged" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1">MLB</RadioButton>
-                <RadioButton IsMouseDirectlyOverChanged="RadioButton_SportChanged" VerticalAlignment="Bottom" HorizontalAlignment="Center" Grid.Column="1">NBA</RadioButton>
+                <RadioButton x:Name="RadioNHL" IsMouseDirectlyOverChanged="RadioButton_SportChanged" VerticalAlignment="Center"  HorizontalAlignment="Center" IsChecked="True" FlowDirection="RightToLeft" >NHL</RadioButton>
+                <RadioButton x:Name="RadioNFL" IsMouseDirectlyOverChanged="RadioButton_SportChanged" VerticalAlignment="Bottom" Margin="0,0,-3,0" HorizontalContentAlignment="Left" HorizontalAlignment="Center" FlowDirection="RightToLeft">NFL</RadioButton>
+                <RadioButton x:Name="RadioMLB" IsMouseDirectlyOverChanged="RadioButton_SportChanged" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1">MLB</RadioButton>
+                <RadioButton x:Name="RadioNBA" IsMouseDirectlyOverChanged="RadioButton_SportChanged" VerticalAlignment="Bottom" HorizontalAlignment="Center" Grid.Column="1">NBA</RadioButton>
                 <Label Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalContentAlignment="Center">CHOOOSE YOUR SPORT BEATCH</Label>
             </Grid>
             <Image Margin="10"  Grid.Row="1" x:Name="Sponsor"></Image>
