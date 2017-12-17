@@ -16,6 +16,7 @@ using SportTrack.Logic;
 using System.IO;
 using System.Threading;
 using System.Net;
+using SportTrack.Logic.Model;
 
 namespace SportTrack.UI
 {
@@ -29,11 +30,13 @@ namespace SportTrack.UI
         
         public MainWindow()
         {
+            Context context = new Context();
+            context.Objectives.ToList();
             
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
             InitializeComponent();
             LoadingGif.Source = new Uri(projectRootDirectory + @"\..\loading.gif");
-            LoadingGif2.Source = new Uri(projectRootDirectory + @"\..\loading2.gif");
+           // LoadingGif2.Source = new Uri(projectRootDirectory + @"\..\loading.gif");
             Sponsor.Source = new BitmapImage(new Uri(projectRootDirectory + @"\..\3NWzq6NI58Y.jpg"));
             Sponsor2.Source = new BitmapImage(new Uri(projectRootDirectory + @"\..\qFGrsz8RhOQ.jpg"));
 
@@ -45,8 +48,8 @@ namespace SportTrack.UI
         {
             SportsFeedRepository sportsFeed = new SportsFeedRepository();
             await sportsFeed.SportsFeedGetDataAsync(sport, 2016, "regular", new DateTime(2016, 10, 10));
-            LoadingGif2.Visibility = Visibility.Collapsed;
-            LoadingGif2.Stop();
+            //LoadingGif2.Visibility = Visibility.Collapsed;
+           // LoadingGif2.Stop();
         }
 
         public async void LoadNews(string sport)
@@ -253,8 +256,8 @@ namespace SportTrack.UI
             LoadingGif.Play();
             loadingTextBlock.Visibility = Visibility.Visible;
 
-            LoadingGif2.Play();
-            LoadingGif2.Visibility = Visibility.Visible;
+         //   LoadingGif2.Play();
+           // LoadingGif2.Visibility = Visibility.Visible;
             
             LoadNews(sport);
             LoadStandings(sport);
