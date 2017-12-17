@@ -57,6 +57,9 @@
     <Compile Include="BingModel\Image.cs" />
     <Compile Include="BingModel\Provider.cs" />
     <Compile Include="BingRepository.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Model\Context.cs" />
+    <Compile Include="Model\ModelRepository.cs" />
     <Compile Include="Model\Objective.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Repository.cs" />

@@ -13,6 +13,7 @@ Title="CreateNewTask" Height="531" Width="360" ResizeMode="NoResize">
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
+
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -26,36 +27,40 @@ Title="CreateNewTask" Height="531" Width="360" ResizeMode="NoResize">
                 <RowDefinition Height="*"></RowDefinition>
 
             </Grid.RowDefinitions>
-            <DatePicker Name="AAAAA" SelectedDateChanged="AAAAA_SelectedDateChanged" Grid.Row="0" ></DatePicker>
-            <DatePicker Name="basd" Grid.Row="2" ></DatePicker>
+            <DatePicker  Name="First_Date" SelectedDateChanged="AAAAA_SelectedDateChanged" Grid.Row="0" ></DatePicker>
+            <DatePicker Name="Second_Date" Grid.Row="2" ></DatePicker>
         </Grid>
 
-        <Button Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="4" Margin="10,20" Background="RoyalBlue" FontSize="44">CLICK ME</Button>
-        <TextBox Grid.Column="1" Margin="10,10" Background="LightSteelBlue"></TextBox>
-        <ComboBox Background="Black" Grid.Row="3" Grid.Column="1" Margin="0,40" >
+        <Button Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="4" Margin="10,20" Background="RoyalBlue" Click="Button_Click" FontSize="44">CLICK ME</Button>
+        <TextBox x:Name="NameForTask" Grid.Column="1" Margin="10,10" VerticalAlignment="Top" Background="LightSteelBlue"></TextBox>
+        <ComboBox Background="Black" Grid.Row="3" Grid.Column="1" Margin="0,50,0,10" >
             <TextBlock HorizontalAlignment="Stretch" >Day</TextBlock>
             <TextBlock>Week</TextBlock>
             <TextBlock>Month</TextBlock>
         </ComboBox>
-        <Label VerticalAlignment="Center" HorizontalAlignment="Center" Content="Name"></Label>
+        <TextBox  x:Name="TaskForQualitative" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,10,10,50" TextWrapping="Wrap" Visibility="Collapsed">aaaa</TextBox>
+        <Label VerticalAlignment="Top" Margin="0,10,0,0" HorizontalAlignment="Center" Content="Name"></Label>
+        <Label VerticalAlignment="Bottom" HorizontalAlignment="Center" Content="Description"></Label>
+        <TextBox x:Name="DescriptionOfTask" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="10,55,10,5"></TextBox>
         <Label VerticalAlignment="Center" HorizontalAlignment="Center" Content="тип цели" Grid.Row="1"></Label>
         <Label VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="2">
             <Label.Content>
                 <TextBlock TextWrapping="Wrap">тут дата</TextBlock>
             </Label.Content>
         </Label>
-        <Label VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="3">
+        <Label VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,15" Grid.Row="3">
             <Label.Content>
-                <TextBlock TextWrapping="Wrap">частота</TextBlock>
+                <TextBlock TextWrapping="Wrap">Частота</TextBlock>
             </Label.Content>
         </Label>
+        <TextBlock x:Name="TextQualitative" VerticalAlignment="Top" HorizontalAlignment="Center" Grid.Row="3" TextWrapping="Wrap" Visibility="Collapsed" >Введите число описывающее вашу цель</TextBlock>
         <Grid Grid.Column="1" Grid.Row="1" Background="BlanchedAlmond">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
-            <RadioButton x:Name="f1" VerticalAlignment="Center"></RadioButton>
-            <RadioButton x:Name="f2" VerticalAlignment="Center" Grid.Row="1"></RadioButton>
+            <RadioButton x:Name="Quantitative" VerticalAlignment="Center" IsChecked="True" IsMouseDirectlyOverChanged="f1_IsMouseDirectlyOverChanged"></RadioButton>
+            <RadioButton x:Name="Qualitative" VerticalAlignment="Center" Grid.Row="1" IsMouseDirectlyOverChanged="Qualitative_IsMouseDirectlyOverChanged"></RadioButton>
             <TextBlock Margin="20,10" FontSize="21">Качественная</TextBlock>
             <TextBlock Margin="20,10" Grid.Row="1" FontSize="21">Количественная</TextBlock>
         </Grid>

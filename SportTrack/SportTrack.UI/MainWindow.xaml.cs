@@ -19,17 +19,17 @@ using System.Net;
 
 namespace SportTrack.UI
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
+    
     public partial class MainWindow : Window
     {
         string projectRootDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
         Repository r = new Repository();
+        
 
         
         public MainWindow()
         {
+            
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
             InitializeComponent();
             LoadingGif.Source = new Uri(projectRootDirectory + @"\..\loading.gif");
@@ -73,8 +73,8 @@ namespace SportTrack.UI
                         Height = 38,
                         Margin = new Thickness(55, 5, 5, 5)
                     };
-                    a.Inlines.Add(Repository.SearchResults[i].Url);
-                    linkTextBlock.Inlines.Add(a);
+                    linkNews.Inlines.Add(Repository.SearchResults[i].Url);
+                    linkTextBlock.Inlines.Add(linkNews);
                     linkTextBlock.MaxWidth = 120;
                     linkTextBlock.PreviewMouseDown += (s, e) => { TextBlock chosenLink = s as TextBlock; Hyperlink link = chosenLink.Inlines.FirstInline as Hyperlink; Browser aa = new Browser(link.NavigateUri); aa.Show(); };
                     TextBlock desciptionTextBlock = new TextBlock
@@ -110,125 +110,127 @@ namespace SportTrack.UI
         
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Random rnd = new Random();
-            Grid DynamicGrid = new Grid
-            {
-                Name = "aaaaname"
-            };
-            // Create Columns
-            ColumnDefinition gridCol1 = new ColumnDefinition();
-            ColumnDefinition gridCol2 = new ColumnDefinition();
-            ColumnDefinition gridCol3 = new ColumnDefinition();
-            ColumnDefinition gridCol4 = new ColumnDefinition();
-            gridCol1.Width = new GridLength(325);
-            gridCol2.Width = new GridLength(98);
-            gridCol3.Width = new GridLength(51);
-            gridCol4.Width = new GridLength(49);
-            DynamicGrid.ColumnDefinitions.Add(gridCol1);
-            DynamicGrid.ColumnDefinitions.Add(gridCol2);
-            DynamicGrid.ColumnDefinitions.Add(gridCol3);
-            DynamicGrid.ColumnDefinitions.Add(gridCol4);
-            // Create Rows
-            RowDefinition gridRow1 = new RowDefinition();
-            RowDefinition gridRow2 = new RowDefinition();
-            RowDefinition gridRow3 = new RowDefinition();
-            RowDefinition gridRow4 = new RowDefinition();
-            RowDefinition gridRow5 = new RowDefinition();
-            gridRow1.Height = new GridLength(20);
-            gridRow2.Height = new GridLength(20);
-            gridRow3.Height = new GridLength(20);
-            gridRow4.Height = new GridLength(20);
-            gridRow5.Height = new GridLength(20);
+            CreateNewTask create = new CreateNewTask();
+            create.Show();
+            //Random rnd = new Random();
+            //Grid DynamicGrid = new Grid
+            //{
+            //    Name = "aaaaname"
+            //};
+            //// Create Columns
+            //ColumnDefinition gridCol1 = new ColumnDefinition();
+            //ColumnDefinition gridCol2 = new ColumnDefinition();
+            //ColumnDefinition gridCol3 = new ColumnDefinition();
+            //ColumnDefinition gridCol4 = new ColumnDefinition();
+            //gridCol1.Width = new GridLength(325);
+            //gridCol2.Width = new GridLength(98);
+            //gridCol3.Width = new GridLength(51);
+            //gridCol4.Width = new GridLength(49);
+            //DynamicGrid.ColumnDefinitions.Add(gridCol1);
+            //DynamicGrid.ColumnDefinitions.Add(gridCol2);
+            //DynamicGrid.ColumnDefinitions.Add(gridCol3);
+            //DynamicGrid.ColumnDefinitions.Add(gridCol4);
+            //// Create Rows
+            //RowDefinition gridRow1 = new RowDefinition();
+            //RowDefinition gridRow2 = new RowDefinition();
+            //RowDefinition gridRow3 = new RowDefinition();
+            //RowDefinition gridRow4 = new RowDefinition();
+            //RowDefinition gridRow5 = new RowDefinition();
+            //gridRow1.Height = new GridLength(20);
+            //gridRow2.Height = new GridLength(20);
+            //gridRow3.Height = new GridLength(20);
+            //gridRow4.Height = new GridLength(20);
+            //gridRow5.Height = new GridLength(20);
 
-            DynamicGrid.RowDefinitions.Add(gridRow1);
-            DynamicGrid.RowDefinitions.Add(gridRow2);
-            DynamicGrid.RowDefinitions.Add(gridRow3);
-            DynamicGrid.RowDefinitions.Add(gridRow4);
-            DynamicGrid.RowDefinitions.Add(gridRow5);
+            //DynamicGrid.RowDefinitions.Add(gridRow1);
+            //DynamicGrid.RowDefinitions.Add(gridRow2);
+            //DynamicGrid.RowDefinitions.Add(gridRow3);
+            //DynamicGrid.RowDefinitions.Add(gridRow4);
+            //DynamicGrid.RowDefinitions.Add(gridRow5);
 
-            TextBlock DynamicTextBlock = new TextBlock
-            {
-                Background = new SolidColorBrush(Colors.White),
-                Text = "Test"
-            };
-            TextBlock DynamicTextBlock2 = new TextBlock
-            {
-                Background = new SolidColorBrush(Colors.AntiqueWhite),
-                Text = "Test"
+            //TextBlock DynamicTextBlock = new TextBlock
+            //{
+            //    Background = new SolidColorBrush(Colors.White),
+            //    Text = "Test"
+            //};
+            //TextBlock DynamicTextBlock2 = new TextBlock
+            //{
+            //    Background = new SolidColorBrush(Colors.AntiqueWhite),
+            //    Text = "Test"
 
-            };
-            TextBlock DynamicTextBlock3 = new TextBlock
-            {
-                Background = new SolidColorBrush(Colors.AntiqueWhite),
-                Text = "TIME LEFT:",
-                TextAlignment = TextAlignment.Center,
-                FontSize = 19,
-                Margin = new Thickness(5, 5, 5, 5)
-            };
-            Label DynamicLabel = new Label
-            {
-                Background = new SolidColorBrush(Colors.Azure),
-                Content = rnd.Next(40),
-                VerticalContentAlignment = VerticalAlignment.Center,
-                HorizontalContentAlignment = HorizontalAlignment.Right
-            };
-            TextBlock DynamicTextBlock4 = new TextBlock
-            {
-                Background = new SolidColorBrush(Colors.AntiqueWhite),
-                Text = "ДНЯ",
-                TextAlignment = TextAlignment.Left,
-                VerticalAlignment = VerticalAlignment.Center
-            };
-            ProgressBar DynamicProgressBar = new ProgressBar
-            {
-                Minimum = 0,
-                Maximum = 100,
-                Value = rnd.Next(101)
-            };
-            Button DynamicButton = new Button
-            {
-                Margin = new Thickness(0, 5, 5, 5),
-                Content = "Edit"
-            };
-            Button DynamicButtonDelete = new Button
-            {
-                Margin = new Thickness(5),
-                Content = "Delete",
-                Background = new SolidColorBrush(Colors.Red)
-            };
+            //};
+            //TextBlock DynamicTextBlock3 = new TextBlock
+            //{
+            //    Background = new SolidColorBrush(Colors.AntiqueWhite),
+            //    Text = "TIME LEFT:",
+            //    TextAlignment = TextAlignment.Center,
+            //    FontSize = 19,
+            //    Margin = new Thickness(5, 5, 5, 5)
+            //};
+            //Label DynamicLabel = new Label
+            //{
+            //    Background = new SolidColorBrush(Colors.Azure),
+            //    Content = rnd.Next(40),
+            //    VerticalContentAlignment = VerticalAlignment.Center,
+            //    HorizontalContentAlignment = HorizontalAlignment.Right
+            //};
+            //TextBlock DynamicTextBlock4 = new TextBlock
+            //{
+            //    Background = new SolidColorBrush(Colors.AntiqueWhite),
+            //    Text = "ДНЯ",
+            //    TextAlignment = TextAlignment.Left,
+            //    VerticalAlignment = VerticalAlignment.Center
+            //};
+            //ProgressBar DynamicProgressBar = new ProgressBar
+            //{
+            //    Minimum = 0,
+            //    Maximum = 100,
+            //    Value = rnd.Next(101)
+            //};
+            //Button DynamicButton = new Button
+            //{
+            //    Margin = new Thickness(0, 5, 5, 5),
+            //    Content = "Edit"
+            //};
+            //Button DynamicButtonDelete = new Button
+            //{
+            //    Margin = new Thickness(5),
+            //    Content = "Delete",
+            //    Background = new SolidColorBrush(Colors.Red)
+            //};
 
-            B.Children.Add(DynamicGrid);
-            DynamicGrid.Children.Add(DynamicTextBlock);
-            Grid.SetRow(DynamicTextBlock, 0);
-            Grid.SetColumn(DynamicTextBlock, 0);
-            Grid.SetRowSpan(DynamicTextBlock, 2);
-            DynamicGrid.Children.Add(DynamicTextBlock2);
-            Grid.SetRow(DynamicTextBlock2, 2);
-            Grid.SetColumn(DynamicTextBlock2, 0);
-            Grid.SetRowSpan(DynamicTextBlock2, 3);
-            DynamicGrid.Children.Add(DynamicTextBlock3);
-            Grid.SetColumn(DynamicTextBlock3, 1);
-            Grid.SetRow(DynamicTextBlock3, 0);
-            Grid.SetRowSpan(DynamicTextBlock3, 2);
-            DynamicGrid.Children.Add(DynamicLabel);
-            Grid.SetColumn(DynamicLabel, 2);
-            Grid.SetRowSpan(DynamicLabel, 2);
-            DynamicGrid.Children.Add(DynamicTextBlock4);
-            Grid.SetColumn(DynamicTextBlock4, 3);
-            Grid.SetRowSpan(DynamicTextBlock4, 2);
-            DynamicGrid.Children.Add(DynamicProgressBar);
-            Grid.SetColumn(DynamicProgressBar, 1);
-            Grid.SetColumnSpan(DynamicProgressBar, 3);
-            Grid.SetRow(DynamicProgressBar, 2);
-            DynamicGrid.Children.Add(DynamicButton);
-            Grid.SetColumn(DynamicButton, 1);
-            Grid.SetRow(DynamicButton, 3);
-            Grid.SetRowSpan(DynamicButton, 2);
-            DynamicGrid.Children.Add(DynamicButtonDelete);
-            Grid.SetRow(DynamicButtonDelete, 3);
-            Grid.SetRowSpan(DynamicButtonDelete, 2);
-            Grid.SetColumn(DynamicButtonDelete, 2);
-            Grid.SetColumnSpan(DynamicButtonDelete, 2);
+            //B.Children.Add(DynamicGrid);
+            //DynamicGrid.Children.Add(DynamicTextBlock);
+            //Grid.SetRow(DynamicTextBlock, 0);
+            //Grid.SetColumn(DynamicTextBlock, 0);
+            //Grid.SetRowSpan(DynamicTextBlock, 2);
+            //DynamicGrid.Children.Add(DynamicTextBlock2);
+            //Grid.SetRow(DynamicTextBlock2, 2);
+            //Grid.SetColumn(DynamicTextBlock2, 0);
+            //Grid.SetRowSpan(DynamicTextBlock2, 3);
+            //DynamicGrid.Children.Add(DynamicTextBlock3);
+            //Grid.SetColumn(DynamicTextBlock3, 1);
+            //Grid.SetRow(DynamicTextBlock3, 0);
+            //Grid.SetRowSpan(DynamicTextBlock3, 2);
+            //DynamicGrid.Children.Add(DynamicLabel);
+            //Grid.SetColumn(DynamicLabel, 2);
+            //Grid.SetRowSpan(DynamicLabel, 2);
+            //DynamicGrid.Children.Add(DynamicTextBlock4);
+            //Grid.SetColumn(DynamicTextBlock4, 3);
+            //Grid.SetRowSpan(DynamicTextBlock4, 2);
+            //DynamicGrid.Children.Add(DynamicProgressBar);
+            //Grid.SetColumn(DynamicProgressBar, 1);
+            //Grid.SetColumnSpan(DynamicProgressBar, 3);
+            //Grid.SetRow(DynamicProgressBar, 2);
+            //DynamicGrid.Children.Add(DynamicButton);
+            //Grid.SetColumn(DynamicButton, 1);
+            //Grid.SetRow(DynamicButton, 3);
+            //Grid.SetRowSpan(DynamicButton, 2);
+            //DynamicGrid.Children.Add(DynamicButtonDelete);
+            //Grid.SetRow(DynamicButtonDelete, 3);
+            //Grid.SetRowSpan(DynamicButtonDelete, 2);
+            //Grid.SetColumn(DynamicButtonDelete, 2);
+            //Grid.SetColumnSpan(DynamicButtonDelete, 2);
 
         }
 
