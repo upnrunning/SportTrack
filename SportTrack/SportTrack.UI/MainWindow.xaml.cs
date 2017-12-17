@@ -32,7 +32,7 @@ namespace SportTrack.UI
         {
             localsql context = new localsql();
             context.User.ToList();
-            
+            LoadStandings("nhl", "2016 Regular");
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
             InitializeComponent();
             LoadingGif.Source = new Uri(projectRootDirectory + @"\..\loading.gif");
@@ -41,7 +41,6 @@ namespace SportTrack.UI
             Sponsor2.Source = new BitmapImage(new Uri(projectRootDirectory + @"\..\qFGrsz8RhOQ.jpg"));
 
             LoadNews("nhl news"); // NHL news and standings are loaded by default
-            LoadStandings("nhl");
             int i = 1;
             ModelRepository add = new ModelRepository();
             foreach (var item in context.Set<Objective>().ToList())
@@ -184,13 +183,14 @@ namespace SportTrack.UI
             
         }
 
-        public async void LoadStandings(string sport)
+        public async void LoadStandings(string sport, string season)
         {
+            string[] seasonInfo = season.Split(new char[] { ' ' }, 2);
             SportsFeedRepository sportsFeed = new SportsFeedRepository();
-            await sportsFeed.SportsFeedGetDataAsync(sport, 2016, "regular");
-            //LoadingGif2.Visibility = Visibility.Collapsed;
-           // LoadingGif2.Stop();
-            }
+            await sportsFeed.SportsFeedGetDataAsync(sport, Convert.ToInt32(seasonInfo[0]), seasonInfo[1].ToLower());
+            StandingsListView.ItemsSource = null;
+            StandingsListView.ItemsSource = Repository.OverallStandings;
+        }
 
         public async void LoadNews(string sport)
         {
@@ -280,11 +280,12 @@ namespace SportTrack.UI
             LoadingGif.Play();
             loadingTextBlock.Visibility = Visibility.Visible;
 
-         //   LoadingGif2.Play();
-           // LoadingGif2.Visibility = Visibility.Visible;
-            
+            //   LoadingGif2.Play();
+            // LoadingGif2.Visibility = Visibility.Visible;
+            var selected = seasonComboBox.SelectedItem as TextBlock;
+            string season = selected.Text;
             LoadNews(sport);
-            LoadStandings(sport);
+            LoadStandings(sport, season);
         }
 
         private void LoadingGif_MediaEnded(object sender, RoutedEventArgs e)
@@ -302,7 +303,18 @@ namespace SportTrack.UI
 
         private void seasonComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            ComboBox box = sender as ComboBox;
+            var selected = box.SelectedItem as TextBlock;
+            string season = selected.Text;
+            string sport = "";
+                        if (RadioMLB != null && RadioNBA != null && RadioNHL != null && RadioNFL != null)
+                            {
+                                if (RadioNHL.IsChecked == true) sport = "nhl";
+                                else if (RadioNFL.IsChecked == true) sport = "nfl";
+                                else if (RadioNBA.IsChecked == true) sport = "nba";
+                                else if (RadioMLB.IsChecked == true) sport = "mlb";
+                LoadStandings(sport, season);
+                           }
         }
     } 
 }
