@@ -23,11 +23,13 @@ namespace SportTrack.UI
      
         public Browser()
         {
+            
             InitializeComponent();
         }
 
         public Browser(Uri uri)
         {
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
             InitializeComponent();
             WebBrowser.Navigate(uri);
             dynamic activeX = WebBrowser.GetType().InvokeMember("ActiveXInstance",

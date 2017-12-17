@@ -31,23 +31,50 @@ namespace SportTrack.Logic.SportsFeedModel
         [JsonProperty("@name")]
         public string Name { get; set; }
         [JsonProperty("teamentry")]
-        public TeamEntry[] Standings { get; set; }
+        public TeamEntryWrapper[] Standings { get; set; }
     }
 
+    
+
     [NotMapped]
-    public class TeamEntry
+    public class TeamEntryWrapper
     {
         public Team Team { get; set; }
         public int Rank { get; set; }
         [JsonProperty("stats")]
-        Dictionary<string, StatType> StatTypes { get; set; }
+        public Stats Stats { get; set; }
+        
     }
 
-    //[NotMapped]
-    //public class Info
-    //{
-    //    public KeyValuePair<string,StatType> GamesPlayed { get; set; }
-    //    [JsonProperty("stats")]
-        
-    //}
+    [NotMapped]
+    public class Stats
+    {
+        [JsonProperty("GamesPlayed")]
+        public StatType GamesPlayed { get; set; }
+        [JsonProperty("stats")]
+        public Dictionary<string, StatType> StatTypes { get; set; }
+        public string OutputStats
+
+        {
+            get
+            {
+
+                try
+                {
+                    string s = "";
+                    foreach (var key in this.StatTypes.Keys)
+                    {
+                        s += $" {key}: {StatTypes[key].Value.ToString()}";
+                    }
+
+                    return s;
+                }
+
+                catch { return "Data not available"; }
+
+
+
+            }
+        }
+    }
 }

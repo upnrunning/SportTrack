@@ -28,6 +28,12 @@ namespace SportTrack.Logic
                 foreach (var item in bingResults)
                 {
                     BingResult res = item.ToObject<BingResult>();
+                    if (res.Image == null) {
+                        res.Image = new Image
+                        {
+                            ThumbNail = new ThumbNail()
+                        };
+                    }
                     Repository.SearchResults.Add(res);
                 }
 
